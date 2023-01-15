@@ -10,6 +10,7 @@ const UsersAPI = {
 			}
 
 			return new View(request,reply)
+			.setLayout('layouts/login.eta')
 			.send('users/login.eta',await Controller.getDefault({
 				auth: request.auth
 			}));

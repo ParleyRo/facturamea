@@ -31,8 +31,6 @@
   }
   </script>
 
-  <%~ await includeFile('templates/default/layouts/navbar.eta', it) %>
-  
   <%~ await includeFile(it.body, it) %>
 
   <% if (it.js) { %>
