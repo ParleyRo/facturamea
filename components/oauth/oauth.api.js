@@ -13,7 +13,7 @@ const OauthAPI = {
 
 				reply.setCookie('token', sJwt, {path: '/'});
 
-				return reply.redirect('/home');
+				return reply.redirect('/');
 
 			}
 
