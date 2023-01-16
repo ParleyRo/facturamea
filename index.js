@@ -5,7 +5,6 @@ const fastify = require('./app')();
 fastify.listen({port: process.env.PORT || 80, host:"0.0.0.0"} , (err, address) => {
 
   if (err) throw err
-  fastify.swagger();
 
 })
 
