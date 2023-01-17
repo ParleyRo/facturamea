@@ -1,3 +1,4 @@
+const Settings = require('./settings');
 
 module.exports = {
 
@@ -8,6 +9,12 @@ module.exports = {
 		}
 
 		return oData
+	},
+
+	async addCompany(oData){
+
+		return await Settings.addCompany(oData);
+	
 	}
 
 }

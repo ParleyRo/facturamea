@@ -79,6 +79,17 @@ class Database {
 		}
 	}
 
+	async replace(table,params) {
+		try {
+			const [oResult] = await this.connection.query(`REPLACE INTO ${table} SET ?`,params);
+			return oResult;
+			
+		} catch (err) {
+			console.log('database.insert',err);
+			throw new Error("Error on insert")
+		}
+	}
+
 	async delete(table,where) {
 		try {
 			const [oResult] = await this.connection.query(`DELETE FROM ${table} WHERE ?`,where);

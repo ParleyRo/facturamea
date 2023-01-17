@@ -1,21 +1,17 @@
 
 <div id="app">
 	<app></app>
-
-	<div class="container is-max-desktop">
-		<p>Settings</p>
-	</div>
 </div>
 
 
-<% /* <script type="module">
+<script type="module">
 
 	import { createApp } from 'vue';
 	
-	import App from "/assets/default/js/vue/components/user/User.vue.js";
+	import App from "/assets/default/js/vue/components/settings/Settings.vue.js";
 
 	const app = createApp({components: {App}});
 
 	app.mount('#app');
 
-</script> */ %>
+</script>

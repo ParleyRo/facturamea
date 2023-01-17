@@ -6,8 +6,6 @@ export default {
 				method="post"
 				action="/oauth/connect/"
 				@submit="checkForm"
-				
-			
 			>
 				<div class="columns is-centered is-vcentered is-centered">
 					<div class="column is-one-third">
