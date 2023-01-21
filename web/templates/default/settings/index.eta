@@ -1,17 +1,22 @@
 
-<div id="app">
-	<app></app>
+<div id="settings">
+	<settings 
+		companies-data="<%= JSON.stringify(it.companiesData || {}) %>" 
+		buyers-data="<%= JSON.stringify(it.buyersData || {}) %>"
+		available-fields-company = "<%= JSON.stringify(it.availableFieldsCompany || {}) %>"
+		available-fields-buyer = "<%= JSON.stringify(it.availableFieldsBuyer || {}) %>"
+	>
+	</settings>
 </div>
-
 
 <script type="module">
 
 	import { createApp } from 'vue';
 	
-	import App from "/assets/default/js/vue/components/settings/Settings.vue.js";
+	import Settings from "/assets/default/js/vue/components/settings/Settings.vue.js";
 
-	const app = createApp({components: {App}});
+	const settings = createApp({components: {Settings}});
 
-	app.mount('#app');
+	settings.mount('#settings');
 
 </script>

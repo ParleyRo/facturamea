@@ -1,121 +1,112 @@
+import CompaniesList from "./CompaniesList.vue.js";
+import CompanyForm from "./CompanyForm.vue.js";
+
+import BuyersList from "./CompaniesList.vue.js";
+import BuyerForm from "./CompanyForm.vue.js";
+
 export default {
 	template: `
+		
 		<div class="container is-fullhd">
-			<form 
-				method="post"
-				action="/settings/add/company"
-				@submit="checkForm"
-			>
-				<div class="columns is-multiline is-mobile">
 
-					<div v-for="(data, fieldName, index) in fields" class="column is-half">
-
-						<div><p class="title is-6">{{formatCamelCase(fieldName)}}</p></div>
-
-						<div class="field">
-							<div class="control is-small">
-								<input 
-									class="input is-small" 
-									v-model="data.value" 									
-									type="text" 
-									:placeholder="formatCamelCase(fieldName)"
-									:required="data.isRequired ? true : false"
-								>
-							</div>
-						</div>
-
-					</div>
+			<div class="tabs is-centered is-boxed">
+				<ul>
+					<li :class="[tabActive =='company' ? 'is-active' : '']">
+						<a v-on:click="tabbSetActive('company')">
+							<span class="icon is-small"><i class="fas fa-file-invoice" aria-hidden="true"></i></span>
+							<span>Your company</span>
+						</a>
+					</li>
+					<li :class="[tabActive =='buyer' ? 'is-active' : '']">
+						<a v-on:click="tabbSetActive('buyer')">
+							<span class="icon is-small"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></span>
+							<span>Buyer</span>
+						</a>
+					</li>
+					
+				</ul>
+			</div>
+			
+			<div v-if="tabActive =='company'">
+				<CompaniesList 
+					v-on:changed="changed"
+					:companiesData="company.list" 
+					:select="company.selected"
+					:type="'company'"
+				/>
 				
-				</div>
+				<CompanyForm 
+					v-on:submited="add"
+					:data="company.formData"
+					:fieldsNames="company.fields"
+					:type="'company'"
+				/>
+			</div>
+
+			<div v-if="tabActive =='buyer'">
+				<BuyersList 
+					v-on:changed="changed"
+					:companiesData="buyer.list" 
+					:select="buyer.selected"
+					:type="'buyer'"
+				/>
 				
-				<div class="columns">
-					<div class="column">
-						<div class="control">
-							<button class="button is-primary">Submit</button>
-						</div>
-					</div>
-				</div>
-				
-			</form>
+				<BuyerForm 
+					v-on:submited="add"
+					:data="buyer.formData"
+					:fieldsNames="buyer.fields"
+					:type="'buyer'"
+				/>
+			</div>
+			
 		</div>
 	`,
 	props: {
-		
+		companiesData: String,
+		buyersData: String,
+		availableFieldsCompany: String,
+		availableFieldsBuyer: String
 	},
 	data() {
 
-		const aFieldsName = [
-			'companyName','companyRegistrationNumber','VATNumber',
-			'Address','Phone','Email','Bank','Swift','Iban'
-		];
-
-		let oFields = {};
-
-		aFieldsName.forEach(fieldName => oFields[fieldName] = {
-			value: ''
-		});
-
-		oFields.companyName['isRequired'] = true;
-
 		return {
-			errors: {},
-			fields: oFields
+			tabActive: 'company',
+			company:{
+				formData: {},
+				selected: "",
+				fields: JSON.parse(this.availableFieldsCompany),
+				list: JSON.parse(this.companiesData)
+			},
+			buyer:{
+				formData: {},
+				selected: "",
+				fields: JSON.parse(this.availableFieldsBuyer),
+				list: JSON.parse(this.buyersData)
+			}
 		}
+		
 	},
-	async created(){
-	
+	methods:{
+		tabbSetActive: function(tabName){
+			this.tabActive = tabName;
+		},
+		add: function({type,data}){
+			data.data = JSON.parse(data.data);
+			
+			this[type].list[data.name] = data;
+			this[type].selected = data.name;
+			
+		},
+		changed: function({type,companyName}){
+
+			this[type].formData = this[type].list[companyName]?.data || {};
+			this[type].selected = companyName;
+		}
 	},
 	components: {
-	
-	},
-	methods: {
-		
-		formatCamelCase: function(sText){
-			
-			const sFormatText = sText.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1");
-			
-			return sFormatText.charAt(0).toUpperCase() + sFormatText.slice(1);
-
-		},
-		checkForm: async function (e) {
-
-			e.preventDefault();
-		
-			this.errors = {};
-
-			const oData = {};
-
-			for (const fieldName in this.fields) {
-				oData[fieldName] = this.fields[fieldName].value
-
-				if (this.fields[fieldName].isRequired && !this.fields[fieldName].value) {
-					this.errors[fieldName] = `${fieldName} required.`;
-				}
-			}
-			
-			if (Object.keys(this.errors).length) {
-				console.log(this.errors)
-				return false;
-			}
-
-			const response = await fetch(e.target.action,{
-				method: 'post',
-				body: JSON.stringify(oData),
-				headers: {'Content-Type': 'application/json'}
-			});
-
-			if(response.redirected && response.url){
-				window.location.href = response.url;
-			}
-			
-			const data = await response.json();
-
-			if(data.error){
-				this.errors['default'] = data.message;
-			}
-			
-			
-		}
+		CompaniesList,
+		CompanyForm,
+		BuyersList,
+		BuyerForm
 	}
-
 }

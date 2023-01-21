@@ -24,27 +24,23 @@ const SettingsAPI = {
 				return reply.redirect('/',200);
 			}
 
+			const data = {};
+			for(let field in request.body){
+				data[field] = request.body[field];
+			}
+
 			const aData = {
 				id_user: request.auth.user.id,
 				type: request.params.type,
 				name: request.body.companyName,
-				data: JSON.stringify({
-					companyName: request.body.companyName,
-					companyRegistrationNumber: request.body.companyRegistrationNumber,
-					VATNumber: request.body.VATNumber,
-					Address: request.body.Address,
-					Phone: request.body.Phone,
-					Email: request.body.Email,
-					Bank: request.body.Bank,
-					Swift: request.body.Swift,
-					Iban: request.body.Iban
-				})
+				data: JSON.stringify(data)
 			}
 
-			let response = Controller.addCompany(aData);
-
+			const response = await Controller.addCompany(aData);
+			
 			return {
-				state: 'success'
+				state: 'success',
+				data: response
 			}
 		},
 		url:'/settings/add/:type'
