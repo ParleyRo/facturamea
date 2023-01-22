@@ -6,14 +6,13 @@ export default {
 			@submit.prevent="checkForm"
 			
 		>
-			<div class="columns is-multiline is-mobile">
+			<div class="columns is-multiline is-mobile is-align-items-end">
 
 				<div v-for="(data, fieldName, index) in fields" :key="data.id" class="column is-half">
 
-					<div><p class="title is-6 mb-1">{{data.data.formatedFieldName}} </p></div>
-
 					<div class="field">
-						<div class="control is-small">
+						<label class="mb-2">{{data.data.formatedFieldName}}</label>
+						<div class="control is-small pt-1">
 							<input 
 								class="input is-small" 
 								v-model="data.value" 

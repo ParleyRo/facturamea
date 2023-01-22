@@ -1,23 +1,23 @@
 export default {
 	template: `
-		
-		<div class="control">
-			<p class="mb-2 pl-1">Select your {{type}}</p>
-			<div class="select">
-				<select v-model="selected" v-on:change="changed">
-					
-					<option value="">Nothing selected</option>
-					<option 
-						v-for="companyData in companiesData"
-						:key="companyData.name"
-						:value="companyData.name"
-					>
-						{{companyData.name}}
-					</option>
+		<div class="field">
+  			<label class="label">Select your {{type}}</label>
+			<div class="control">
+				<div class="select">
+					<select v-model="selected" v-on:change="changed">
+						
+						<option value="">Nothing selected</option>
+						<option 
+							v-for="companyData in companiesData"
+							:key="companyData.name"
+							:value="companyData.name"
+						>
+							{{companyData.name}}
+						</option>
 
-				</select>
+					</select>
+				</div>
 			</div>
-
 		</div>
 	`,
 	data() {

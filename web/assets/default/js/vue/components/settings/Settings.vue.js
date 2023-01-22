@@ -7,7 +7,7 @@ import BuyerForm from "../company/CompanyForm.vue.js";
 export default {
 	template: `
 		
-		<div class="container is-fullhd">
+		<div class="container is-fullhd px-4">
 
 			<div class="tabs is-centered is-boxed">
 				<ul>
@@ -34,7 +34,9 @@ export default {
 					:select="company.selected"
 					:type="'company'"
 				/>
-				<div class="mb-4"></div>
+
+				<div class="is-divider" data-content="Add or Edit companies bellow"></div>
+
 				<CompanyForm 
 					v-on:submited="add"
 					:data="company.formData"
