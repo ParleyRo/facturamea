@@ -3,7 +3,8 @@ export default {
 		<form 
 			method="post"
 			:action="formAction"
-			@submit="checkForm"
+			@submit.prevent="checkForm"
+			
 		>
 			<div class="columns is-multiline is-mobile">
 
@@ -87,9 +88,7 @@ export default {
 			return sFormatText.charAt(0).toUpperCase() + sFormatText.slice(1);
 
 		},
-		checkForm: async function (e) {
-
-			e.preventDefault();
+		checkForm: async function () {
 
 			this.errors = {};
 
