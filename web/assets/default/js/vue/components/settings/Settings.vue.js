@@ -1,8 +1,8 @@
-import CompaniesList from "./CompaniesList.vue.js";
-import CompanyForm from "./CompanyForm.vue.js";
+import CompaniesList from "../company/CompaniesList.vue.js";
+import CompanyForm from "../company/CompanyForm.vue.js";
 
-import BuyersList from "./CompaniesList.vue.js";
-import BuyerForm from "./CompanyForm.vue.js";
+import BuyersList from "../company/CompaniesList.vue.js";
+import BuyerForm from "../company/CompanyForm.vue.js";
 
 export default {
 	template: `
@@ -34,7 +34,7 @@ export default {
 					:select="company.selected"
 					:type="'company'"
 				/>
-				
+				<div class="mb-4"></div>
 				<CompanyForm 
 					v-on:submited="add"
 					:data="company.formData"

@@ -1,6 +1,6 @@
 
-<div id="app">
-	<app></app>
+<div id="login">
+	<login></login>
 </div>
 
 
@@ -8,10 +8,10 @@
 
 	import { createApp } from 'vue';
 	
-	import App from "/assets/default/js/vue/components/user/User.vue.js";
+	import Login from "/assets/default/js/vue/components/users/Login.vue.js";
 
-	const app = createApp({components: {App}});
+	const login = createApp({components: {Login}});
 
-	app.mount('#app');
+	login.mount('#login');
 
 </script>
