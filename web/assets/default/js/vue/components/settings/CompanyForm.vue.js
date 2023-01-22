@@ -88,7 +88,7 @@ export default {
 			return sFormatText.charAt(0).toUpperCase() + sFormatText.slice(1);
 
 		},
-		checkForm: async function () {
+		checkForm: async function (e) {
 
 			this.errors = {};
 
