@@ -2,6 +2,8 @@
 	<invoice
 		companies-data="<%= JSON.stringify(it.companiesData || {}) %>" 
 		buyers-data="<%= JSON.stringify(it.buyersData || {}) %>"
+		available-fields-company = "<%= JSON.stringify(it.availableFieldsCompany || {}) %>"
+		available-fields-buyer = "<%= JSON.stringify(it.availableFieldsBuyer || {}) %>"
 	>
 	</invoice>
 </div>

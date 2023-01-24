@@ -29,7 +29,7 @@ class Companies  {
 
 		if(type === 'buyer'){
 			return [
-				'companyName','companyRegistrationNumber','VATNumber',
+				'companyName','companyRegistrationNumber','Company ID',
 				'Address','Phone','Email','Bank','Swift','Iban'
 			];
 		}

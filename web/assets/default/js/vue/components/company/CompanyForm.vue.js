@@ -68,7 +68,9 @@ export default {
 			const oList =  isEmpty ? this.fields : newVal;
 
 			for (let fieldName in oList) {
-				this.fields[fieldName].value = isEmpty ? '' : newVal[fieldName];
+				if(this.fields[fieldName] != null){
+					this.fields[fieldName].value = isEmpty ? '' : newVal[fieldName];
+				}
 			}
 
         }

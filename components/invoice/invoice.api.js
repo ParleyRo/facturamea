@@ -10,6 +10,10 @@ const InvoiceAPI = {
 			}
 
 			return new View(request,reply)
+			.addCss('invoice.css')
+			.addCss('colors.css')
+			.addCss('bulma-calendar.min.css')
+			.addJs('bulma-calendar.min.js')
 			.send('invoice/index.eta',await Controller.getDefault({
 				auth: request.auth
 			}));
