@@ -12,6 +12,10 @@ module.exports = {
 
 	async add(oData){
 		return await Companies.add(oData);
+	},
+
+	async getCurrencies (){
+		return Companies.getCurrencies();
 	}
 
 }

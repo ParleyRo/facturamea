@@ -25,6 +25,8 @@ module.exports = {
 
 		oData['availableFieldsCompany'] = await rpc.companies.getFieldsNamesByType('company');
 		oData['availableFieldsBuyer'] = await rpc.companies.getFieldsNamesByType('buyer');
+
+		oData['availableCurrencies'] = await rpc.companies.getCurrencies();
 		
 		return oData
 	}

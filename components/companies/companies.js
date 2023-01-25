@@ -17,6 +17,25 @@ class Companies  {
 		
 		return new Companies(result);
 	}
+	static async getCurrencies(){
+		return {
+			ron: {
+				symbol: 'lei',
+				code: 'lei',
+				label: 'RON'
+			},
+			eur: {
+				symbol: '€',
+				code: '&euro;',
+				label: 'EUR'
+			},
+			usd: {
+				symbol: '$',
+				code: '&dollar;',
+				label: 'USD'
+			}
+		}
+	}
 
 	static async getFieldsNamesByType(type){
 

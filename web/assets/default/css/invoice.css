@@ -1,0 +1,51 @@
+.invoiceContent{
+	width: 19cm;
+  	height: 24.7cm;
+	padding-left: 1cm;
+	padding-right: 1cm;
+	padding-top: 1cm;
+	padding-bottom: 0.5cm;
+  	display: block;
+  	margin: 0 auto;
+  	margin-bottom: 0.5cm;
+	font-size: 12px;
+	position: relative;
+	font-family: sans-serif;
+}
+.invoiceContent:hover{
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.invoiceHeader p{
+	margin: 0 0 2px 0;
+}
+.invoiceFooter{
+	position: absolute;
+    width: 17cm;
+    bottom: 0.7cm;
+    border-top: 1px solid #358b9d;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #358b9d;
+}
+
+.invoiceFooter p{
+	margin: 0 0 5px 0;
+}
+
+/* table {
+    border-collapse: collapse;
+    border-spacing: 0;
+	width: 100%;
+}
+
+tr{
+	display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+table td, table th {
+    border: 1px solid #358b9d;
+    border-width: 1px;
+    padding: .5em .75em;
+    vertical-align: top;
+} */
