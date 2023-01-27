@@ -29,14 +29,14 @@ const SettingsAPI = {
 				data[field] = request.body[field];
 			}
 
-			const aData = {
+			const oData = {
 				id_user: request.auth.user.id,
 				type: request.params.type,
 				name: request.body.companyName,
 				data: JSON.stringify(data)
 			}
 
-			const response = await Controller.addCompany(aData);
+			const response = await Controller.addCompany(oData);
 			
 			return {
 				state: 'success',

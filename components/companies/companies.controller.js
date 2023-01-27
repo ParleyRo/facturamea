@@ -1,21 +1,17 @@
-const Companies = require('./companies');
+const Company = require('./company');
 
 module.exports = {
 
 	async getByType({idUser,type}){
-		return await Companies.getByType({id_user: idUser,type});
+		return await Company.getByType({id_user: idUser,type});
 	},
 	
 	async getFieldsNamesByType(type){
-		return await Companies.getFieldsNamesByType(type);
+		return await Company.getFieldsNamesByType(type);
 	},
 
 	async add(oData){
-		return await Companies.add(oData);
-	},
-
-	async getCurrencies (){
-		return Companies.getCurrencies();
+		return await Company.add(oData);
 	}
 
 }

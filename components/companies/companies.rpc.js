@@ -7,7 +7,6 @@ function handlers(namespace) {
 	.register('getByType', async ({idUser,type}) => await Controller.getByType({idUser,type}))
 	.register('getFieldsNamesByType', async (type) => await Controller.getFieldsNamesByType(type))
 	.register('add', async (data) => await Controller.add(data))
-	.register('getCurrencies', async () => await Controller.getCurrencies())
 }
 
 module.exports = handlers

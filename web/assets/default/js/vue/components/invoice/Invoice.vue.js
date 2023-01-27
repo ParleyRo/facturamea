@@ -147,7 +147,15 @@ export default {
 
 			<div class="is-divider" data-content="Invoice rendered"></div>
 
-			<button v-on:click="printToPdf">printToPdf</button>
+			<div class="columns is-mobile is-justify-content-center is-align-items-end is-multiline">
+				<div class="column is-7">
+					<div class="buttons is-justify-content-flex-end">
+						<button class="button is-info" v-on:click="add">Save Invoice</button>
+						<button class="button is-primary" v-on:click="printToPdf">Print To Pdf</button>
+					</div>
+				</div>
+			</div>
+			
 			
 			<div id="invoice-render">
 				<InvoiceRender
@@ -195,8 +203,7 @@ export default {
 					{
 						name: '',
 						qty: 1,
-						amount: 0,
-						total: 0
+						amount: 0
 					}
 				]
 			}
@@ -208,19 +215,48 @@ export default {
 
 			this[type].selected = companyName;
 		},
-		printToPdf: function(){
-			var element = document.querySelector('#invoice-render .invoiceContent');
+		add: async function(){
 
-			html2pdf(element,{
-				filename: `${this.company.list[this.company.selected]?.data.companyName.replaceAll(' ','-')}-invoice-${this.invoice.number}.pdf`
+			const oData = {
+				id_company: this.company.list[this.company.selected].id,
+				id_buyer: this.buyer.list[this.buyer.selected].id,
+				number: this.invoice.number,
+				currency: this.invoice.currencies.selected,
+				date: this.invoice.date.getTime(),
+				due_date: this.invoice.dueDate.getTime(),
+				products: this.invoice.products
+			}
+
+			const response = await fetch('/invoice/add',{
+				method: 'post',
+				body: JSON.stringify(oData),
+				headers: {'Content-Type': 'application/json'}
 			});
+			
+			const data = await response.json();
+
+		},
+		printToPdf: function(){
+			
+			var pdfContent = document.querySelector('#invoice-render').innerHTML;
+			var pdfTemplate = `<html><head>${document.head.innerHTML}</head><body>${pdfContent}</body></html>`;
+			
+			// var windowObject = window.open('',"ModalPopUp","toolbar=no,scrollbars=no,location=no,statusbar=no,menubar=no,resizable=0,left = 490,top=300");
+			var windowObject = window.open();
+
+			windowObject.document.write(pdfTemplate);
+
+			setTimeout(() => {
+				windowObject.print();
+				windowObject.close();
+			}, 250);
+			
 		},
 		addProduct: function(){
 			this.invoice.products.push({
 				name: '',
 				qty: 1,
-				amount: 0,
-				total: 0
+				amount: 0
 			})
 		},
 		removeProduct: function(index){

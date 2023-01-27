@@ -1,7 +1,5 @@
 export default {
 	template: `
-		<div class="scroll-x">
-			
 			<div class="invoiceContent">
 				
 				<div class="invoiceHeader">
@@ -109,9 +107,6 @@ export default {
 				</div>
 
 			</div>
-		
-		</div>
-
 	`,
 	data() {
 
