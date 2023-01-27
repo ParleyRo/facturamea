@@ -13,7 +13,6 @@
     "fastify": "^4.0.3",
     "fastify-plugin": "^4.3.0",
     "fastify-qs": "^4.0.0",
-    "html2pdf.js": "^0.10.1",
     "mysql2": "^2.3.3",
     "node-fetch": "^3.2.10",
     "nodemailer": "^6.8.0",

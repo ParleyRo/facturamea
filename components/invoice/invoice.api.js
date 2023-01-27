@@ -14,7 +14,6 @@ const InvoiceAPI = {
 			.addCss('colors.css')
 			.addCss('bulma-calendar.min.css')
 			.addJs('bulma-calendar.min.js')
-			.addJs('html2pdf.bundle.js')
 			.send('invoice/index.eta',await Controller.getDefault({
 				auth: request.auth
 			}));
