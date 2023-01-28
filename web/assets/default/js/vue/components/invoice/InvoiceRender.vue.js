@@ -4,7 +4,7 @@ export default {
 				
 				<div class="invoiceHeader">
 
-					<div class="columns is-flex">
+					<div class="columns is-mobile">
 
 						<div class="column">
 							<p class="is-size-4 has-color-turquoise" v-show="companyData?.[companyFieldsList[0]]">
@@ -22,7 +22,7 @@ export default {
 
 				<div class="invoiceBody">
 
-					<div class="columns">
+					<div class="columns is-mobile">
 						<div class="column">
 							
 							<p class="is-size-6 has-color-turquoise"><b>INVOICE / FACTURĂ</b></p>
@@ -96,7 +96,7 @@ export default {
 				
 				<div className="invoiceFooter">
 						
-					<div className="columns is-gapless is-multiline">
+					<div className="columns is-gapless is-multiline is-mobile">
 
 						<div v-for="(field) in companyFieldsList" class="column is-one-third pr-2">
 							<p><small>{{field != 'companyName' ? formatCamelCaseToText(field) + ': ' : ''}}{{companyData?.[field]}}</small></p>
