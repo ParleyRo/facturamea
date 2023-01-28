@@ -5,9 +5,7 @@ const Controller = require('./users.controller');
 function handlers(namespace) {
 	rpc.setNamespace(namespace)
 	.register('createUser', async (objValue) => await Controller.createUser(objValue))
-	.register('getUserByUsername', async (username) => await Controller.getUserByUsername(username))
-	.register('getUserById', async (id) => await Controller.getUserById(id))
-	.register('getUserByLogin', async (username,password) => await Controller.getUserByLogin(username,password))
+	.register('login', async (username,password) => await Controller.login(username,password))
 }
 
 module.exports = handlers

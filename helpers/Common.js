@@ -8,17 +8,17 @@ class Common {
        
         function pad(n) {return n<10 ? "0"+n : n}
 
-        const d = new Date(parseInt(iTimestamp))
+        const oDate = new Date(parseInt(iTimestamp))
 
-        return pad(d.getDate())+', '
-            + d.toLocaleString('default', { month: 'short' }) + ' '
-            + d.getFullYear()
-            // +pad(d.getMonth()+1)+dash
+        return pad(oDate.getDate())+', '
+            + oDate.toLocaleString('default', { month: 'short' }) + ' '
+            + oDate.getFullYear()
+            // +pad(oDate.getMonth()+1)+dash
            
-            // +d.getFullYear()+dash
-            // +pad(d.getHours())+colon+
-            // +pad(d.getMinutes())+colon+
-            // +pad(d.getSeconds())
+            // +oDate.getFullYear()+dash
+            // +pad(oDate.getHours())+colon+
+            // +pad(oDate.getMinutes())+colon+
+            // +pad(oDate.getSeconds())
     }
 
 	static getInstance() {

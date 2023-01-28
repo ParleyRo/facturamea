@@ -1,21 +1,23 @@
-
-<div id="app">
-	<app></app>
-
-	<div class="container is-max-desktop">
-		<p>Invoice</p>
-	</div>
+<div id="invoice">
+	<invoice
+		companies-data="<%= JSON.stringify(it.companiesData || {}) %>" 
+		buyers-data="<%= JSON.stringify(it.buyersData || {}) %>"
+		available-fields-company = "<%= JSON.stringify(it.availableFieldsCompany || {}) %>"
+		available-fields-buyer = "<%= JSON.stringify(it.availableFieldsBuyer || {}) %>"
+		available-currencies = "<%= JSON.stringify(it.availableCurrencies || {}) %>"
+	>
+	</invoice>
 </div>
 
 
-<% /* <script type="module">
+<script type="module">
 
 	import { createApp } from 'vue';
 	
-	import App from "/assets/default/js/vue/components/user/User.vue.js";
+	import Invoice from "/assets/default/js/vue/components/invoice/Invoice.vue.js";
 
-	const app = createApp({components: {App}});
+	const invoice = createApp({components: {Invoice}});
 
-	app.mount('#app');
+	invoice.mount('#invoice');
 
-</script> */ %>
+</script>

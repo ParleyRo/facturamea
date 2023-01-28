@@ -32,22 +32,22 @@ class Database {
 
 	}
 
-	async getRow(sql,params) {
+	async getRow(sSql,oParams) {
 		try {
-			const [oResult] = await this.connection.query([sql,'limit 1'].join(' '),params)
+			const [oResult] = await this.connection.query([sSql,'limit 1'].join(' '),oParams)
 			if (!oResult.length) return false;
 
 			return oResult[0];
 		} catch (err) {
-			console.log(err,sql);
+			console.log(err,sSql);
 			throw new Error("Error on row")
 		}
 		
 	}
 
-	async getScalar(sql,params,position = 0) {
+	async getScalar(sSql,oParams,position = 0) {
 		try {
-			const oResult = await this.getRow(sql,params);
+			const oResult = await this.getRow(sSql,oParams);
 			if (!oResult) return false;
 			return oResult[position];
 		} catch (err) {
@@ -57,9 +57,9 @@ class Database {
 		
 	}
 
-	async query(strQuery,params) {
+	async query(strQuery,oParams) {
 		try {
-			const [oResult] = await this.connection.query(strQuery,params);
+			const [oResult] = await this.connection.query(strQuery,oParams);
 			return oResult;
 		} catch (err) {
 			console.log(err);
@@ -68,9 +68,16 @@ class Database {
 		
 	}
 
-	async insert(table,params) {
+	async insert(sTable,oParams) {
+
+		const aUpdate = [];
+
+		for (const [key,value] of Object.entries(oParams)) {
+			aUpdate.push(`${key}=VALUES(${key})`);
+		}
+
 		try {
-			const [oResult] = await this.connection.query(`INSERT INTO ${table} SET ?`,params);
+			const [oResult] = await this.connection.query(`INSERT INTO ${sTable} SET ? ON DUPLICATE KEY UPDATE ${aUpdate.join(',')}`,oParams);
 			return oResult;
 			
 		} catch (err) {
@@ -79,9 +86,20 @@ class Database {
 		}
 	}
 
-	async delete(table,where) {
+	async replace(sTable,oParams) {
 		try {
-			const [oResult] = await this.connection.query(`DELETE FROM ${table} WHERE ?`,where);
+			const [oResult] = await this.connection.query(`REPLACE INTO ${sTable} SET ?`,oParams);
+			return oResult;
+			
+		} catch (err) {
+			console.log('database.insert',err);
+			throw new Error("Error on insert")
+		}
+	}
+
+	async delete(sTable,where) {
+		try {
+			const [oResult] = await this.connection.query(`DELETE FROM ${sTable} WHERE ?`,where);
 			return oResult;
 		} catch (err) {
 			console.log('database.delete',err);
@@ -89,20 +107,21 @@ class Database {
 		}
 	}
 
-	async update(table,params,where) {
+	async update(sTable,oParams,oWhere) {
 		try {
-			const oSet = [];
-			const oWhere = []
-			const oValues = []
-			for (const [key,value] of Object.entries(params)) {
-				oSet.push(`${key}=?`);
-				oValues.push(value);
+			const aSet = [];
+			const aWhere = [];
+			const aValues = [];
+
+			for (const [key,value] of Object.entries(oParams)) {
+				aSet.push(`${key}=?`);
+				aValues.push(value);
 			}
-			for (const [key,value] of Object.entries(where)) {
-				oWhere.push(`${key}=?`);
-				oValues.push(value);
+			for (const [key,value] of Object.entries(oWhere)) {
+				aWhere.push(`${key}=?`);
+				aValues.push(value);
 			}
-			const [oResult] =  await this.connection.query([`UPDATE ${table} SET`,oSet.join(','),`WHERE`,oWhere.join(' AND ')].join(' '),oValues);
+			const [oResult] =  await this.connection.query([`UPDATE ${sTable} SET`,aSet.join(','),`WHERE`,aWhere.join(' AND ')].join(' '),aValues);
 			return oResult;
 			
 		} catch (err) {
@@ -113,10 +132,10 @@ class Database {
 	}
 
 	async beginTransaction() {
-		const r = await this.connection.getConnection()
-		await r.beginTransaction()
+		const oResult = await this.connection.getConnection()
+		await oResult.beginTransaction()
 
-		return new Database(r)
+		return new Database(oResult)
 	}
 
 	async commit() {

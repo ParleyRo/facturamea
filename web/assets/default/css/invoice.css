@@ -1,0 +1,37 @@
+.invoiceContent{
+	width: 21cm;
+    height: 29.7cm;
+    display: block;
+    margin: 0 auto;
+    padding: 10mm 10mm 38mm 10mm;
+    font-size: 12px;
+    position: relative;
+    font-family: sans-serif;
+    border: 1px solid #dedede;
+    border-radius: 3px;
+}
+.invoiceContent:hover{
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.invoiceHeader p{
+	margin: 0 0 2px 0;
+}
+.invoiceFooter{
+	position: absolute;
+    width: calc(21cm - 20mm);
+    bottom: 5mm;
+    border-top: 1px solid #358b9d;
+    padding-top: 3mm;
+    padding-bottom: 3mm;
+    border-bottom: 1px solid #358b9d;
+}
+
+.invoiceFooter p{
+	margin: 0 0 5px 0;
+}
+
+@page 
+{
+	size: auto;   /* auto is the initial value */
+	margin: 0mm;  /* this affects the margin in the printer settings */
+}
