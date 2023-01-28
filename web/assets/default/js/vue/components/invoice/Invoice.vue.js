@@ -13,19 +13,13 @@ export default {
 				
 				<div class="column is-one-quarter-desktop is-one-quarter-tablet is-half-mobile pr-1">
 					<CompaniesList 
-						v-on:changed="changed"
-						:companiesData="company.list" 
-						:select="company.selected"
-						:type="'company'"
+						:companyData="company"
 					/>
 				</div>
 				
 				<div class="column is-one-quarter-desktop is-one-quarter-tablet is-half-mobile">
 					<BuyersList 
-						v-on:changed="changed"
-						:companiesData="buyer.list" 
-						:select="buyer.selected"
-						:type="'buyer'"
+						:companyData="buyer" 
 					/>
 				</div>
 
@@ -76,11 +70,13 @@ export default {
 				selected: "",
 				list: JSON.parse(this.companiesData),
 				fields: JSON.parse(this.availableFieldsCompany),
+				label: "company"
 			},
 			buyer:{
 				selected: "",
 				list: JSON.parse(this.buyersData),
 				fields: JSON.parse(this.availableFieldsBuyer),
+				label: "buyer"
 			},
 			invoice:{
 				date: new Date(),
@@ -103,10 +99,7 @@ export default {
 		
 	},
 	methods:{
-		changed: function({type,companyName}){
 
-			this[type].selected = companyName;
-		},
 		add: async function(){
 
 			const oData = {

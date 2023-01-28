@@ -1,18 +1,18 @@
 export default {
 	template: `
 		<div class="field">
-  			<label class="label">Select your {{type}}</label>
+  			<label class="label">Select your {{company.label}}</label>
 			<div class="control">
 				<div class="select">
-					<select v-model="selected" v-on:change="changed">
+					<select v-model="company.selected" >
 						
 						<option value="">Nothing selected</option>
 						<option 
-							v-for="companyData in companiesData"
-							:key="companyData.name"
-							:value="companyData.name"
+							v-for="companyItem in company.list"
+							:key="companyItem.id"
+							:value="companyItem.id"
 						>
-							{{companyData.name}}
+							{{companyItem.name}}
 						</option>
 
 					</select>
@@ -23,31 +23,13 @@ export default {
 	data() {
 		
 		return {
-			selected: "",
+			company: this.companyData,
+			selected: ''
 		}
 			
 	},
 	props: {
-		companiesData: Object,
-		select: String,
-		type: String
-	},
-	watch: {
-		select: function(value){
-			this.selected=value;
-			this.$emit('changed', {
-				companyName: this.selected,
-				type: this.type
-			});
-		}
-	},
-	methods: {
-		changed: function(elem){
-			this.$emit('changed', {
-				companyName: this.selected,
-				type: this.type
-			});
-		}
+		companyData: Object,
 	}
 
 }

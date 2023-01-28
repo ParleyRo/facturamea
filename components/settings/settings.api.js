@@ -37,7 +37,6 @@ const SettingsAPI = {
 			}
 
 			const response = await Controller.addCompany(oData);
-			
 			return {
 				state: 'success',
 				data: response

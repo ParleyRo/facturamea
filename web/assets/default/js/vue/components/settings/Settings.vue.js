@@ -29,35 +29,28 @@ export default {
 			
 			<div v-if="tabActive =='company'">
 				<CompaniesList 
-					v-on:changed="changed"
-					:companiesData="company.list" 
-					:select="company.selected"
-					:type="'company'"
+					:companyData="company" 
 				/>
 
 				<div class="is-divider" data-content="Add or Edit companies bellow"></div>
 
 				<CompanyForm 
 					v-on:submited="add"
-					:data="company.formData"
-					:fieldsNames="company.fields"
-					:type="'company'"
+					:companyData="company"
 				/>
 			</div>
 
 			<div v-if="tabActive =='buyer'">
+
 				<BuyersList 
-					v-on:changed="changed"
-					:companiesData="buyer.list" 
-					:select="buyer.selected"
-					:type="'buyer'"
+					:companyData="buyer" 
 				/>
 				
+				<div class="is-divider" data-content="Add or Edit companies bellow"></div>
+
 				<BuyerForm 
 					v-on:submited="add"
-					:data="buyer.formData"
-					:fieldsNames="buyer.fields"
-					:type="'buyer'"
+					:companyData="buyer"
 				/>
 			</div>
 			
@@ -74,16 +67,16 @@ export default {
 		return {
 			tabActive: 'company',
 			company:{
-				formData: {},
 				selected: "",
 				fields: JSON.parse(this.availableFieldsCompany),
-				list: JSON.parse(this.companiesData)
+				list: JSON.parse(this.companiesData),
+				label: "company",
 			},
 			buyer:{
-				formData: {},
 				selected: "",
 				fields: JSON.parse(this.availableFieldsBuyer),
-				list: JSON.parse(this.buyersData)
+				list: JSON.parse(this.buyersData),
+				label: "buyer",
 			}
 		}
 		
@@ -93,16 +86,12 @@ export default {
 			this.tabActive = tabName;
 		},
 		add: function({type,data}){
+			
 			data.data = JSON.parse(data.data);
 			
-			this[type].list[data.name] = data;
-			this[type].selected = data.name;
+			this[type].list[data.id] = data;
+			this[type].selected = data.id;
 			
-		},
-		changed: function({type,companyName}){
-
-			this[type].formData = this[type].list[companyName]?.data || {};
-			this[type].selected = companyName;
 		}
 	},
 	components: {

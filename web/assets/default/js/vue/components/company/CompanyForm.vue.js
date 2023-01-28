@@ -8,17 +8,17 @@ export default {
 		>
 			<div class="columns is-multiline is-mobile is-align-items-end">
 
-				<div v-for="(data, fieldName, index) in fields" :key="data.id" class="column is-half">
+				<div v-for="(fieldName, index) in company.fields" :key="index" class="column is-half">
 
 					<div class="field">
-						<label class="mb-2">{{data.data.formatedFieldName}}</label>
+						<label class="mb-2">{{formatCamelCaseToText(fieldName)}}</label>
 						<div class="control is-small pt-1">
 							<input 
+								:id="fieldName"
 								class="input is-small" 
-								v-model="data.value" 
 								type="text" 
-								:placeholder="data.data.formatedFieldName + ' ...'"
-								:required="data.isRequired ? true : false"
+								:placeholder="formatCamelCaseToText(fieldName) + ' ...'"
+								v-model="formData[fieldName]"
 							>
 						</div>
 					</div>
@@ -38,46 +38,36 @@ export default {
 		</form>
 	`,
 	data() {
-				
-		let fields = {};
 
-		this.fieldsNames.forEach(fieldName => fields[fieldName] = {
-			value: this.data[fieldName] || '',
-			data: {
-				formatedFieldName: this.formatCamelCaseToText(fieldName)
-			}
-		});
-
-		fields.companyName['isRequired'] = true;
+		const formData = {}
+		for (const [index,fieldName] of Object.entries(this.companyData.fields)) {
+			formData[fieldName] = ''
+		}
 
 		return {
 			errors: {},
-			fields: fields
+			formData: formData,
+			company: this.companyData,
 		}
 			
 	},
 	props: {
-		data: Object,
-		fieldsNames: Array,
-		type: String
+		companyData: Object
 	},
 	watch: { 
-      	data: function(newVal, oldVal) { 
-
-			const isEmpty = !Object.keys(newVal).length;
-			const oList =  isEmpty ? this.fields : newVal;
-
-			for (let fieldName in oList) {
-				if(this.fields[fieldName] != null){
-					this.fields[fieldName].value = isEmpty ? '' : newVal[fieldName];
+		companyData: {
+			deep: true,
+			handler(newValue, oldValue) {
+				
+				for (const [index,fieldName] of Object.entries(newValue.fields)) {
+					this.formData[fieldName] = newValue.list?.[newValue.selected]?.data[fieldName]
 				}
 			}
-
-        }
-    },
+		}
+	},
 	computed:{
 		formAction: function() {
-			return `/settings/add/${this.type}`
+			return `/settings/add/${this.company.label}`
 		}
 	},
 	methods: {
@@ -93,24 +83,13 @@ export default {
 
 			this.errors = {};
 
-			const oData = {};
-
-			for (const fieldName in this.fields) {
-				oData[fieldName] = this.fields[fieldName].value
-
-				if (this.fields[fieldName].isRequired && !this.fields[fieldName].value) {
-					this.errors[fieldName] = `${fieldName} required.`;
-				}
-			}
-			
 			if (Object.keys(this.errors).length) {
-				console.log(this.errors)
 				return false;
 			}
 
 			const response = await fetch(e.target.action,{
 				method: 'post',
-				body: JSON.stringify(oData),
+				body: JSON.stringify(this.formData),
 				headers: {'Content-Type': 'application/json'}
 			});
 			
@@ -118,14 +97,18 @@ export default {
 
 			if(data.error){
 				this.errors['default'] = data.message;
+
+				return;
 			}
-			
-			if(data.state && data.state==='success'){
-				this.$emit('submited', {
-					data:data.data,
-					type: this.type
-				})
+
+			this.company.list[data.data.id] = {
+				data: {...JSON.parse(data.data.data)},
+				name: data.data.name,
+				type: data.data.type,
+				id: data.data.id
 			}
+
+			this.company.selected = data.data.id
 			
 		}
 	}
