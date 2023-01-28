@@ -9,7 +9,7 @@ export default {
 		
 		<div class="container is-fullhd px-4">
 
-			<div class="columns is-mobile is-justify-content-center">
+			<div class="columns is-justify-content-center">
 				
 				<div class="column is-one-quarter-desktop is-one-quarter-tablet is-half-mobile pr-1">
 					<CompaniesList 
@@ -33,7 +33,7 @@ export default {
 
 			<div class="is-divider" data-content="Invoice rendered"></div>
 
-			<div class="columns is-mobile is-justify-content-center is-align-items-end is-multiline">
+			<div class="columns is-justify-content-center is-align-items-end is-multiline">
 				<div class="column is-7">
 					<div class="buttons is-justify-content-flex-end">
 						<button class="button is-info" v-on:click="add">Save Invoice</button>
@@ -43,7 +43,7 @@ export default {
 			</div>
 			
 			
-			<div id="invoice-render">
+			<div id="invoice-render" class="scroll-x">
 				<InvoiceRender
 					:companyData="company.list[company.selected]?.data"
 					:companyFieldsList="company.fields"

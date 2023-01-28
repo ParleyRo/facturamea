@@ -1,4 +1,4 @@
-<nav class="navbar mb-6" role="navigation" aria-label="main navigation">
+<nav id="nav" class="navbar mb-6" role="navigation" aria-label="main navigation">
  
   <div class="navbar-brand">
     
@@ -6,47 +6,60 @@
       <img src="/assets/default/img/logo.png" width="112" height="28">
     </a>
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" :class="{ 'is-active': isActive }" @click="toggleActive" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
+
   </div>
 
-  <div class="navbar-menu">
+  <div :class="{ 'is-active': isActive }" class="navbar-menu" id="navbarMenu">
 
     <div class="navbar-start">
 
-      <a href="/" class="navbar-item">
-        Home
-      </a>
-
-      <a href="/invoice" class="navbar-item">
-        Invoice
-      </a>
-
-      <a href="/invoices" class="navbar-item">
-        Invoices
-      </a>
-
-      <a href="/settings" class="navbar-item">
-        Settings
-      </a>
+      <a href="/" class="navbar-item">Home </a>
+      <a href="/invoice" class="navbar-item">Invoice</a>
+      <a href="/invoices" class="navbar-item">Invoices</a>
+      <a href="/settings" class="navbar-item">Settings</a>
 
     </div>
 
     <div class="navbar-end">
 
       <div class="navbar-item">
-          <div class="buttons">
 
-            <a href="/oauth/disconnect" class="button is-light">
-              Disconnect
-            </a>
-          
+          <div class="buttons">
+            <a href="/oauth/disconnect" class="button is-light">Disconnect</a>
           </div>
+
         </div>
       </div>
 
   </div>
 </nav>
+
+<script type="module">
+
+	import { createApp } from 'vue';
+
+	const nav = createApp({
+
+    data() {
+
+		  return {
+        isActive: false
+      }
+    },
+    methods: {
+
+      toggleActive(){
+        this.isActive = !this.isActive
+      }
+    
+    }
+
+  })
+  .mount('#nav');
+
+</script>
