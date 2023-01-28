@@ -2,7 +2,7 @@ export default {
 	template: `
 			<div class="invoiceData">
 			
-				<div class="column is-justify-content-center is-align-items-end is-multiline">
+				<div class="columns is-justify-content-center is-align-items-end is-multiline">
 					
 					<div class="column is-one-fifth">
 						<div class="field">
@@ -49,7 +49,7 @@ export default {
 
 				</div>
 
-				<div v-for="(product, index) in invoice.products" class="columnss is-justify-content-center is-align-items-end is-multiline">
+				<div v-for="(product, index) in invoice.products" class="columns is-justify-content-center is-align-items-end is-multiline">
 					
 					<div class="column is-4">
 						<div class="field">
