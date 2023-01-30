@@ -4,7 +4,7 @@ export default {
 			
 				<div class="columns is-justify-content-center is-align-items-end is-multiline">
 					
-					<div class="column is-one-fifth">
+					<div class="column is-2">
 						<div class="field">
 							<label class="mb-2">Invoice number</label>
 							<div class="control is-small pt-1">
@@ -19,10 +19,10 @@ export default {
 						</div>
 					</div>
 
-					<div class="column column is-one-fifth">
-						<label class="mb-2">Invoice currency</label>
+					<div class="column is-1">
+						<label class="mb-2">Currency</label>
 						<div class="control">
-							<div class="select">
+							<div class="select is-small is-fullwidth">
 								<select v-model="invoice.currency">
 									
 									<option 
@@ -37,12 +37,12 @@ export default {
 						</div>
 					</div>
 
-					<div class="column is-one-fifth">
+					<div class="column is-2">
 						<label class="mb-2">Invoice date</label>
-						<button ref="invoiceDateTrigger" type="button">Change</button>
+						<button style="" ref="invoiceDateTrigger" type="button">Change</button>
 					</div>
 
-					<div class="column is-one-fifth">
+					<div class="column is-2">
 						<label class="mb-2">Invoice due date</label>
 						<button ref="invoiceDueDateTrigger" type="button">Change</button>
 					</div>
@@ -51,7 +51,7 @@ export default {
 
 				<div v-for="(product, index) in invoice.products" class="columns is-justify-content-center is-align-items-end is-multiline">
 					
-					<div class="column is-4">
+					<div class="column is-3">
 						<div class="field">
 							<label class="mb-2">Description</label>
 							<div class="control is-small pt-1">
@@ -111,7 +111,7 @@ export default {
 						</div>
 					</div>
 
-					<div v-if="index===0" class="column is-1">
+					<div v-if="index===0" class="column is-1 has-text-right">
 						<button v-on:click="addProduct" class="button is-primary">
 							<span class="icon">
 								<i class="fas fa-plus"></i>
@@ -119,8 +119,8 @@ export default {
 						</button>
 					</div>
 
-					<div v-if="index > 0" class="column is-1">
-						<button v-on:click="removeProduct(index)" class="button is-primary">
+					<div v-if="index > 0" class="column is-1 has-text-right">
+						<button v-on:click="removeProduct(index)" class="button is-danger">
 							<span class="icon">
 								<i class="fas fa-minus"></i>
 							</span>

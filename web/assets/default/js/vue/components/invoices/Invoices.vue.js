@@ -13,7 +13,7 @@ export default {
 							<button class="button is-primary" v-on:click="printToPdf">Print To Pdf</button>
 						</div>
 					</div>
-					<div class="invoiceContainer custom-scroll">
+					<div class="invoiceContainer custom-scroll scroll-x">
 						<h1 class="has-text-centered">{{invoiceItem.number}}</h1>
 						<InvoiceRender
 							:companyData="companies[invoiceItem.id_company]?.data"
