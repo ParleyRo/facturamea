@@ -35,3 +35,53 @@
 	size: auto;   /* auto is the initial value */
 	margin: 0mm;  /* this affects the margin in the printer settings */
 }
+
+.invoiceItem {
+    width: calc((21cm / 3) + 1rem);
+    height: calc((29.7cm / 3) + 1rem);
+    display: inline-block;
+    position: relative;
+}
+.invoiceItem .invoiceContainer {
+    position: absolute;
+    left: calc((-1)*(21cm / 3));
+    top: calc((-1) * (29.7cm / 3));
+    transform: scale(0.33);
+    transition: transform 0.5s ease-out, left 0.2s ease-out;
+}
+
+.invoiceItem:hover .invoiceContainer {
+    transform: scale(0.36);
+}
+.invoiceItem h1{
+    transform: scale(3);
+}
+.invoiceItem.is-active .invoiceContainer{
+    position: fixed;
+    transform: scale(1);
+    left: calc(50% - (21cm / 2)) !important;
+    top: 130px !important;
+    z-index: 2;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 15px 0px;
+    background: #fff;
+    overflow-y: scroll;
+    max-height: calc(100vh - 170px);
+}
+
+.invoiceItem.is-active h1{
+    display: none;
+}
+
+.invoiceActions{
+    display: none;
+    width: 21cm;
+    position: fixed;
+    left: calc(50% - (21cm / 2)) !important;
+    background: #fff !important;
+    z-index: 1;
+    top: 88px;
+}
+
+.invoiceItem.is-active .invoiceActions{
+    display: block;
+}

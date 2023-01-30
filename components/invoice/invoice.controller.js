@@ -32,9 +32,16 @@ module.exports = {
 		
 		return oData
 	},
+	async getCurrencies(){
+		return await Invoice.getCurrencies();
+	},
 
 	async add(oData){
 		return await Invoice.add(oData);
+	},
+
+	async delete(id){
+		return await Invoice.delete(id);
 	}
 
 

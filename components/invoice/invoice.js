@@ -37,6 +37,14 @@ class Invoice  {
 
     }
 
+	static async delete(id) {
+
+		const result = await db.delete('invoice',{id:id});
+		
+		return result;
+
+    }
+
 }
 
 module.exports = Invoice;

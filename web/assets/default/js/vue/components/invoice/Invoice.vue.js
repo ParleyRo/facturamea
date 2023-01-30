@@ -29,6 +29,7 @@ export default {
 
 			<InvoiceData 
 				:invoiceData="invoice"
+				:currenciesList="currencies"
 			/>
 
 			<div class="is-divider" data-content="Invoice rendered"></div>
@@ -50,6 +51,7 @@ export default {
 					:buyerData="buyer.list[buyer.selected]?.data"
 					:buyerFieldsList="buyer.fields"
 					:invoiceData="invoice"
+					:currenciesList="currencies"
 				/>
 			</div>
 		</div>
@@ -78,18 +80,17 @@ export default {
 				fields: JSON.parse(this.availableFieldsBuyer),
 				label: "buyer"
 			},
+			currencies: JSON.parse(this.availableCurrencies),
 			invoice:{
 				date: new Date(),
 				dueDate: new Date(Date.now() + dueDateTime ),
 				number: '',
 				dueDateTime: dueDateTime,
-				currencies:{
-					list: JSON.parse(this.availableCurrencies),
-					selected: 'ron'
-				},
+				currency: 'ron',
 				products: [
 					{
 						name: '',
+						unit: 'buc',
 						qty: 1,
 						amount: 0
 					}
@@ -106,13 +107,13 @@ export default {
 				id_company: this.company.list[this.company.selected].id,
 				id_buyer: this.buyer.list[this.buyer.selected].id,
 				number: this.invoice.number,
-				currency: this.invoice.currencies.selected,
+				currency: this.invoice.currency,
 				date: this.invoice.date.getTime(),
 				due_date: this.invoice.dueDate.getTime(),
 				products: this.invoice.products
 			}
 
-			const response = await fetch('/invoice/add',{
+			const response = await fetch('/invoice',{
 				method: 'post',
 				body: JSON.stringify(oData),
 				headers: {'Content-Type': 'application/json'}

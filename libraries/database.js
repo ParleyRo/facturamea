@@ -97,9 +97,9 @@ class Database {
 		}
 	}
 
-	async delete(sTable,where) {
+	async delete(sTable,oWhere) {
 		try {
-			const [oResult] = await this.connection.query(`DELETE FROM ${sTable} WHERE ?`,where);
+			const [oResult] = await this.connection.query(`DELETE FROM ${sTable} WHERE ?`,oWhere);
 			return oResult;
 		} catch (err) {
 			console.log('database.delete',err);

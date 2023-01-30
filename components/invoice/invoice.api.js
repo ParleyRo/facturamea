@@ -6,7 +6,7 @@ const InvoiceAPI = {
 		handler: async (request,reply) => {
 			
 			if(request.auth == null){
-				return reply.redirect('/',200);
+				return reply.redirect('/users/login');
 			}
 
 			return new View(request,reply)
@@ -19,7 +19,7 @@ const InvoiceAPI = {
 			}));
 
 		},
-		url:'/invoice'
+		url:'/'
 	},
 	postAdd:{
 		handler: async (request,reply) => {
@@ -46,7 +46,24 @@ const InvoiceAPI = {
 				data: response
 			}
 		},
-		url:'/invoice/add/'
+		url:'/invoice/'
+	},
+
+	deleteInvoice:{
+		handler: async (request,reply) => {
+
+			if(request.auth == null){
+				return reply.redirect('/',200);
+			}
+			
+			const response = await Controller.delete(request.params.id);
+			
+			return {
+				state: 'success',
+				data: response
+			}
+		},
+		url:'/invoice/:id'
 	}
 }
 module.exports = InvoiceAPI;

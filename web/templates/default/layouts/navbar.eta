@@ -1,4 +1,4 @@
-<nav id="nav" class="navbar mb-6" role="navigation" aria-label="main navigation">
+<nav id="nav" class="navbar mb-6 is-white" role="navigation" aria-label="main navigation">
  
   <div class="navbar-brand">
     
@@ -18,10 +18,10 @@
 
     <div class="navbar-start">
 
-      <a href="/" class="navbar-item">Home </a>
-      <a href="/invoice" class="navbar-item">Invoice</a>
-      <a href="/invoices" class="navbar-item">Invoices</a>
-      <a href="/settings" class="navbar-item">Settings</a>
+      <a href="/" class="<%= it.meta.url.path === '/' ? 'is-active' : '' %> navbar-item">Invoice</a>
+      <% /* <a href="/invoice" class="navbar-item">Invoice</a> */ %>
+      <a href="/invoices" class="<%= it.meta.url.path === '/invoices' ? 'is-active' : '' %> navbar-item">Invoices</a>
+      <a href="/settings" class="<%= it.meta.url.path === '/settings' ? 'is-active' : '' %> navbar-item">Settings</a>
 
     </div>
 

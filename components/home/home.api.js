@@ -15,7 +15,7 @@ const HomeAPI = {
 				}));
 
 		},
-		url:'/'
+		//url:'/'
 	}
 
 }

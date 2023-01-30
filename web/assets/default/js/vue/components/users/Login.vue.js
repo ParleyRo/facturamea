@@ -4,7 +4,7 @@ export default {
 		
 			<form 
 				method="post"
-				action="/oauth/connect/"
+				action="/oauth/connect"
 				@submit="checkForm"
 			>
 				<div class="columns is-centered is-vcentered is-centered">
