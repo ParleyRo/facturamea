@@ -23,10 +23,10 @@ export default {
 						<label class="mb-2">Invoice currency</label>
 						<div class="control">
 							<div class="select">
-								<select v-model="invoice.currencies.selected">
+								<select v-model="invoice.currency">
 									
 									<option 
-										v-for="(currency,currencyName, index) in invoice.currencies.list"
+										v-for="(currency,currencyName, index) in currenciesList"
 										:value="currencyName"
 									>
 										{{currency.label}}
@@ -61,6 +61,21 @@ export default {
 									placeholder="Description..."
 									:required="true"
 									v-model="product.name"
+								>
+							</div>
+						</div>
+					</div>
+
+					<div class="column is-1">
+						<div class="field">
+							<label class="mb-2">Unit</label>
+							<div class="control is-small pt-1">
+								<input 
+									class="input is-small" 
+									type="text" 
+									placeholder="Description..."
+									:required="true"
+									v-model="product.unit"
 								>
 							</div>
 						</div>
@@ -124,7 +139,8 @@ export default {
 		
 	},
 	props: {
-		invoiceData: Object
+		invoiceData: Object,
+		currenciesList: Object
 	},
 	methods:{
 		addProduct: function(){

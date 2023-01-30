@@ -32,11 +32,11 @@ export default {
 							</p>
 
 							<p class="">
-								Invoice-Date(dd.mm.yyyy): <b>{{invoiceData.date.toLocaleDateString(settings.date.locales,settings.date.options)}}</b>
+								Invoice-Date(dd.mm.yyyy): <b>{{typeof invoiceData.date === 'Object' ? invoiceData.date.toLocaleDateString(settings.date.locales,settings.date.options) : invoiceData.date}}</b>
 							</p>
 
 							<p class="">
-								Due-Date(dd.mm.yyyy): <b>{{invoiceData.dueDate.toLocaleDateString(settings.date.locales,settings.date.options)}}</b>
+								Due-Date(dd.mm.yyyy): <b>{{invoiceData.dueDate === 'Object' ? invoiceData.dueDate.toLocaleDateString(settings.date.locales,settings.date.options) : invoiceData.dueDate}}</b>
 							</p>
 
 						</div>
@@ -63,8 +63,9 @@ export default {
 									<th align>Pos no.</th>
 									<th align>Description<br />(Denumirea produselor sau a serviciilor)</th>
 									<th align>Unit<br />(U.M.)</th>
-									<th align>Unit price<br />(-{{invoiceData.currencies.list[invoiceData.currencies.selected].label}}-)</th>
-									<th align>Total Amount<br />(-{{invoiceData.currencies.list[invoiceData.currencies.selected].label}}-)</th>
+									<th align>Quantity<br />(Cantitate)</th>
+									<th align>Unit price<br />(-{{currenciesList[invoiceData.currency].label}}-)</th>
+									<th align>Total Amount<br />(-{{currenciesList[invoiceData.currency].label}}-)</th>
 								</tr>
 							</thead>
 
@@ -72,16 +73,17 @@ export default {
 								<tr v-for="(product, index) in invoiceData.products">
 									<td>{{index+1}}</td>
 									<td>{{product.name}}</td>
+									<td>{{product.unit}}</td>
 									<td>{{product.qty}}</td>
 									<td>{{product.amount}}</td>
 									<td>{{product.qty * product.amount}}</td>
 								</tr> 
 
 								<tr>
-									<td colspan="4">
-										<span><b>Invoice Total -{{invoiceData.currencies.list[invoiceData.currencies.selected].label}}-</b>  </span>
+									<td colspan="5">
+										<span><b>Invoice Total -{{currenciesList[invoiceData.currency].label}}-</b>  </span>
 										<br />
-										<small><i>(Valoare totală de plată factura curentă -{{invoiceData.currencies.list[invoiceData.currencies.selected].label}}-)</i></small>
+										<small><i>(Valoare totală de plată factura curentă -{{currenciesList[invoiceData.currency].label}}-)</i></small>
 									</td>
 									<td>
 										<b>{{invoiceData.products.reduce(function (total, product) { return total + (product.qty * product.amount); }, 0)}}</b>
@@ -129,7 +131,8 @@ export default {
 		companyFieldsList: Array,
 		buyerData: Object,
 		buyerFieldsList: Array,
-		invoiceData: Object
+		invoiceData: Object,
+		currenciesList: Object
 	},
 	methods:{
 
