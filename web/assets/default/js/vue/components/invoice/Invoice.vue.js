@@ -185,7 +185,7 @@ export default {
 
 			setTimeout(() => {
 				windowObject.print();
-				windowObject.close();
+				//windowObject.close();
 			}, 250);
 			
 		}
