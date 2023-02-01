@@ -5,6 +5,7 @@
 		available-fields-company = "<%= JSON.stringify(it.availableFieldsCompany || {}) %>"
 		available-fields-buyer = "<%= JSON.stringify(it.availableFieldsBuyer || {}) %>"
 		available-currencies = "<%= JSON.stringify(it.availableCurrencies || {}) %>"
+		invoices-data="<%= JSON.stringify(it.invoicesData || {}) %>" 
 	>
 	</invoice>
 </div>

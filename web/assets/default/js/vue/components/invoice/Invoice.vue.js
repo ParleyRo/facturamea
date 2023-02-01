@@ -3,6 +3,7 @@ import BuyersList from "../company/CompaniesList.vue.js";
 
 import InvoiceRender from "./InvoiceRender.vue.js";
 import InvoiceData from "./InvoiceData.vue.js";
+import InvoicesList from "../invoices/InvoicesList.vue.js";
 
 export default {
 	template: `
@@ -11,15 +12,21 @@ export default {
 
 			<div class="columns is-justify-content-center">
 				
-				<div class="column is-one-quarter-desktop is-one-quarter-tablet is-half-mobile pr-1">
+				<div class="column is-2">
 					<CompaniesList 
 						:companyData="company"
 					/>
 				</div>
 				
-				<div class="column is-one-quarter-desktop is-one-quarter-tablet is-half-mobile">
+				<div class="column is-3">
 					<BuyersList 
 						:companyData="buyer" 
+					/>
+				</div>
+
+				<div class="column is-2">
+					<InvoicesList 
+						:invoiceData="invoices" 
 					/>
 				</div>
 
@@ -37,7 +44,7 @@ export default {
 			<div class="columns is-justify-content-center is-align-items-end is-multiline">
 				<div class="column is-7">
 					<div class="buttons is-justify-content-flex-end">
-						<button class="button is-info" v-on:click="add">Save Invoice</button>
+						<button :disabled="saveDisabled" class="button is-info" v-on:click="add">Save Invoice</button>
 						<button class="button is-primary" v-on:click="printToPdf">Print To Pdf</button>
 					</div>
 				</div>
@@ -59,6 +66,7 @@ export default {
 	props: {
 		companiesData: String,
 		buyersData: String,
+		invoicesData: String,
 		availableFieldsCompany: String,
 		availableFieldsBuyer: String,
 		availableCurrencies: String
@@ -68,6 +76,11 @@ export default {
 		const dueDateTime = 864000 * 1000;
 
 		return {
+			saveDisabled: true,
+			invoices:{
+				selected: "",
+				list: JSON.parse(this.invoicesData),
+			},
 			company:{
 				selected: "",
 				list: JSON.parse(this.companiesData),
@@ -99,6 +112,41 @@ export default {
 		}
 		
 	},
+	watch:{
+		invoice:{
+			deep: true,
+			handler(newValue, oldValue) {
+				this.saveDisabled = false;
+			}
+		},
+		invoices: {
+			deep: true,
+			handler(newValue, oldValue) {
+
+				this.company.selected = newValue.list[newValue.selected]?.id_company || ''
+				this.buyer.selected = newValue.list[newValue.selected]?.id_buyer || ''
+
+				this.invoice.number = newValue.list[newValue.selected]?.number || ''
+				this.invoice.currency = newValue.list[newValue.selected]?.currency || 'ron'
+				
+				this.invoice.date = new Date(newValue.list[newValue.selected]?.date || new Date())
+				document.getElementById('invoiceDate').bulmaCalendar.date.start = this.invoice.date
+				document.getElementById('invoiceDate').bulmaCalendar.save()
+
+				this.invoice.dueDate = new Date(newValue.list[newValue.selected]?.due_date || (new Date()).getTime() + this.invoice.dueDateTime)
+				document.getElementById('invoiceDueDate').bulmaCalendar.date.start = this.invoice.dueDate
+				document.getElementById('invoiceDueDate').bulmaCalendar.save()
+
+				this.invoice.products = newValue.list[newValue.selected]?.products || [{
+					name: '',
+					unit: 'buc',
+					qty: 1,
+					amount: 0
+				}]
+				
+			}
+		}
+	},
 	methods:{
 
 		add: async function(){
@@ -120,6 +168,8 @@ export default {
 			});
 			
 			const data = await response.json();
+
+			this.saveDisabled = true;
 
 		},
 		printToPdf: function(){
@@ -145,7 +195,8 @@ export default {
 		CompaniesList,
 		BuyersList,
 		InvoiceRender,
-		InvoiceData
+		InvoiceData,
+		InvoicesList
 	}
 	
 }

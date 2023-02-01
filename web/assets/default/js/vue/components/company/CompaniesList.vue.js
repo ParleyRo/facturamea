@@ -3,7 +3,7 @@ export default {
 		<div class="field">
   			<label class="label">Select your {{company.label}}</label>
 			<div class="control">
-				<div class="select">
+				<div class="select is-fullwidth">
 					<select v-model="company.selected" >
 						
 						<option value="">Nothing selected</option>

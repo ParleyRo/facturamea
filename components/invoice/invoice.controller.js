@@ -9,18 +9,22 @@ module.exports = {
 			auth: params.auth,
 		}
 
+		const oCompaniesData = await rpc.companies.getByType({
+			idUser: params.auth?.user?.id,
+			type: 'company'
+		});
+
 		oData['companiesData'] = {};
-
-		const oCompaniesData = await rpc.companies.getByType({idUser: params.auth?.user?.id, type: 'company'});
-
 		for( let index in oCompaniesData){
 			oData['companiesData'][oCompaniesData[index].id] = oCompaniesData[index]
 		}
 
+		const oBuyersData =await rpc.companies.getByType({
+			idUser: params.auth?.user?.id,
+			type: 'buyer'
+		});
+
 		oData['buyersData'] = {};
-
-		const oBuyersData =await rpc.companies.getByType({idUser: params.auth?.user?.id, type: 'buyer'});
-
 		for( let index in oBuyersData){
 			oData['buyersData'][oBuyersData[index].id] = oBuyersData[index]
 		}
@@ -29,6 +33,14 @@ module.exports = {
 		oData['availableFieldsBuyer'] = await rpc.companies.getFieldsNamesByType('buyer');
 
 		oData['availableCurrencies'] = await Invoice.getCurrencies();
+		
+		const oInvoicesData = await rpc.invoices.get({
+			idUser: params.auth?.user?.id
+		});
+		oData['invoicesData'] = {};
+		for( let index in oInvoicesData){
+			oData['invoicesData'][oInvoicesData[index].id] = oInvoicesData[index]
+		}
 		
 		return oData
 	},

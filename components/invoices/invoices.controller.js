@@ -35,6 +35,10 @@ module.exports = {
 		oData['availableCurrencies'] = await rpc.invoice.getCurrencies();
 
 		return oData
+	},
+	async get({idUser}){
+		return await Invoices.get({idUser})
 	}
+
 
 }

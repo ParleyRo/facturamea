@@ -39,12 +39,12 @@ export default {
 
 					<div class="column is-2">
 						<label class="mb-2">Invoice date</label>
-						<button style="" ref="invoiceDateTrigger" type="button">Change</button>
+						<button id="invoiceDate" ref="invoiceDateTrigger" type="button">Change</button>
 					</div>
 
 					<div class="column is-2">
 						<label class="mb-2">Invoice due date</label>
-						<button ref="invoiceDueDateTrigger" type="button">Change</button>
+						<button id="invoiceDueDate" ref="invoiceDueDateTrigger" type="button">Change</button>
 					</div>
 
 				</div>
@@ -186,6 +186,7 @@ export default {
 			})[0];
 			
 			invoiceCalendar.on('select', function(e){
+
 				self.invoice.date = e.data.date.start || null
 				self.invoice.dueDate = new Date(self.invoice.date.getTime() + self.invoice.dueDateTime)
 				
