@@ -30,13 +30,12 @@ export default {
 							<p class="">
 								Invoice-Number: <b>{{invoiceData.number}}</b>
 							</p>
-
 							<p class="">
-								Invoice-Date(dd.mm.yyyy): <b>{{typeof invoiceData.date === 'Object' ? invoiceData.date.toLocaleDateString(settings.date.locales,settings.date.options) : invoiceData.date}}</b>
+								Invoice-Date(dd.mm.yyyy): <b>{{ (new Date(invoiceData.date)).toLocaleDateString('ro-RO',{year: "numeric", month: "numeric", day: "numeric"}) }}</b>
 							</p>
 
 							<p class="">
-								Due-Date(dd.mm.yyyy): <b>{{invoiceData.dueDate === 'Object' ? invoiceData.dueDate.toLocaleDateString(settings.date.locales,settings.date.options) : invoiceData.dueDate}}</b>
+								Due-Date(dd.mm.yyyy): <b>{{ (new Date(invoiceData.dueDate)).toLocaleDateString('ro-RO',{year: "numeric", month: "numeric", day: "numeric"}) }}</b>
 							</p>
 
 						</div>
@@ -113,16 +112,7 @@ export default {
 	data() {
 
 		return {
-			settings: {
-				date: {
-					locales: 'ro-RO',
-					options: {
-						year: "numeric",
-						month: "numeric",
-						day: "numeric",
-					}
-				}
-			}
+
 		}
 		
 	},
