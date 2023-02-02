@@ -2,7 +2,7 @@ export default {
 	template: `
 		<div class="container mt-6">
 
-			<div class="has-text-centered"><img src="/assets/default/img/logo.png" width="112" height="28"></div>
+			<div class="has-text-centered"><img src="/assets/default/img/logo_large.png" width="112" height="28"></div>
 			<form 
 				method="post"
 				action="/oauth/connect"
