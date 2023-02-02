@@ -7,7 +7,7 @@ export default {
 					<div class="columns is-mobile">
 
 						<div class="column">
-							<p class="is-size-4 is-turquoise" v-show="companyData?.[companyFieldsList[0]]">
+							<p class="is-size-5 is-turquoise" v-show="companyData?.[companyFieldsList[0]]">
 								<b>{{companyData?.[companyFieldsList[0]]}}</b>
 							</p>
 							<p v-for="(field) in companyFieldsList.slice(1)" v-show="companyData?.[field]" class="mb-1">
