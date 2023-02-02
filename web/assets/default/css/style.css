@@ -1,3 +1,6 @@
+table{
+    font-size: 12px;
+}
 .is-divider, .is-divider-vertical {
     display: block;
     position: relative;
