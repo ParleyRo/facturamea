@@ -1,6 +1,5 @@
 const Controller = require('./invoice.controller');
 const View = require('../../middlewares/View.js');
-
 const InvoiceAPI = {
 	get:{
 		handler: async (request,reply) => {
@@ -11,7 +10,6 @@ const InvoiceAPI = {
 
 			return new View(request,reply)
 			.addCss('invoice.css')
-			.addCss('colors.css')
 			.addCss('bulma-calendar.min.css')
 			.addJs('bulma-calendar.min.js')
 			.send('invoice/index.eta',await Controller.getDefault({

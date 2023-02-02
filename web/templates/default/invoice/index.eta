@@ -18,7 +18,7 @@
 	import Invoice from "/assets/default/js/vue/components/invoice/Invoice.vue.js";
 
 	const invoice = createApp({components: {Invoice}});
-
+    invoice.config.globalProperties.globalVar = 'globalVar'
 	invoice.mount('#invoice');
 
 </script>

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/assets/default/css/bulma.min.css">
 
 	<link rel="stylesheet" href="/assets/default/css/style.css">
+  <link rel="stylesheet" href="/assets/default/css/colors.css">
 	
   <% if (it.css) { %>
     <% it.css.forEach((css) => { %>

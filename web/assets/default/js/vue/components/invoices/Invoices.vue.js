@@ -10,7 +10,7 @@ export default {
 					<div class="invoiceActions" >
 						<div class="buttons is-justify-content-flex-end">
 							<button class="button is-danger" v-on:click="deleteInvoice(invoiceItem.id,$event)">Delete</button>
-							<button class="button is-primary" v-on:click="printToPdf">Print To Pdf</button>
+							<button class="button is-info" v-on:click="printToPdf">Print To Pdf</button>
 						</div>
 					</div>
 					<div class="invoiceContainer custom-scroll scroll-x">

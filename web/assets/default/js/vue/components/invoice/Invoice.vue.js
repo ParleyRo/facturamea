@@ -44,8 +44,8 @@ export default {
 			<div class="columns is-justify-content-center is-align-items-end is-multiline">
 				<div class="column is-7">
 					<div class="buttons is-justify-content-flex-end">
-						<button :disabled="saveDisabled" class="button is-info" v-on:click="add">Save Invoice</button>
-						<button class="button is-primary" v-on:click="printToPdf">Print To Pdf</button>
+						<button :disabled="saveDisabled" class="button is-info is-outlined" v-on:click="add">Save Invoice</button>
+						<button class="button is-info" v-on:click="printToPdf">Print To Pdf</button>
 					</div>
 				</div>
 			</div>
@@ -168,7 +168,12 @@ export default {
 			});
 			
 			const data = await response.json();
-
+			
+			if(data.data.id){
+				this.invoices.list[data.data.id] = data.data;
+				this.invoices.list[data.data.id].products = JSON.parse(this.invoices.list[data.data.id].products)
+				this.invoices.selected = data.data.id;
+			}
 			this.saveDisabled = true;
 
 		},

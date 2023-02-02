@@ -1,7 +1,8 @@
 export default {
 	template: `
 		<div class="container mt-6">
-		
+
+			<div class="has-text-centered"><img src="/assets/default/img/logo.png" width="112" height="28"></div>
 			<form 
 				method="post"
 				action="/oauth/connect"
@@ -10,7 +11,7 @@ export default {
 				<div class="columns is-centered is-vcentered is-centered">
 					<div class="column is-one-third">
 						<div class="box">
-						
+							<p class="title is-size-4 has-text-centered">Sign In</p>
 							<div class="field">
 								<div class="control has-icons-left has-icons-right">
 									<input v-on:keyup="fieldChanged('username')" v-model="username.value" name="username" class="input" type="text" placeholder="Username/Email">
@@ -45,7 +46,7 @@ export default {
 							
 							<div class="field">
 								<p class="control">
-									<button class="button is-success">
+									<button class="button is-orange">
 										Login
 									</button>
 								</p>

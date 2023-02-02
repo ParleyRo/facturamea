@@ -30,7 +30,7 @@ export default {
 			<div class="columns">
 				<div class="column">
 					<div class="control">
-						<button class="button is-link pl-6 pr-6">Submit</button>
+						<button class="button is-orange pl-6 pr-6">Submit</button>
 					</div>
 				</div>
 			</div>
