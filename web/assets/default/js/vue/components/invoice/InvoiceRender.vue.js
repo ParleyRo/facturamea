@@ -7,7 +7,7 @@ export default {
 					<div class="columns is-mobile">
 
 						<div class="column">
-							<p class="is-size-4 has-color-turquoise" v-show="companyData?.[companyFieldsList[0]]">
+							<p class="is-size-4 is-turquoise" v-show="companyData?.[companyFieldsList[0]]">
 								<b>{{companyData?.[companyFieldsList[0]]}}</b>
 							</p>
 							<p v-for="(field) in companyFieldsList.slice(1)" v-show="companyData?.[field]" class="mb-1">
@@ -25,7 +25,7 @@ export default {
 					<div class="columns is-mobile">
 						<div class="column">
 							
-							<p class="is-size-6 has-color-turquoise"><b>INVOICE / FACTURĂ</b></p>
+							<p class="is-size-6 is-turquoise"><b>INVOICE / FACTURĂ</b></p>
 							
 							<p class="">
 								Invoice-Number: <b>{{invoiceData.number}}</b>
@@ -45,7 +45,7 @@ export default {
 							
 							<p class="is-size-7 "><b>Buyer / Cumpărător:</b></p>
 							
-							<p class="is-size-6 has-color-turquoise" v-show="buyerData?.[buyerFieldsList[0]]">
+							<p class="is-size-6 is-turquoise" v-show="buyerData?.[buyerFieldsList[0]]">
 								<b>{{buyerData?.[buyerFieldsList[0]]}}</b>
 							</p>
 							<p v-for="(field) in buyerFieldsList.slice(1)" v-show="buyerData?.[field]" class="mb-1">

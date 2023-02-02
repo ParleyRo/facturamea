@@ -112,7 +112,7 @@ export default {
 					</div>
 
 					<div v-if="index===0" class="column is-1 has-text-right">
-						<button v-on:click="addProduct" class="button is-primary">
+						<button v-on:click="addProduct" class="button is-info">
 							<span class="icon">
 								<i class="fas fa-plus"></i>
 							</span>
@@ -147,6 +147,7 @@ export default {
 			this.invoice.products.push({
 				name: '',
 				qty: 1,
+				unit: 'buc',
 				amount: 0
 			})
 		},

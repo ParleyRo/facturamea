@@ -1,6 +1,35 @@
-.has-color-turquoise{
+.is-turquoise{
 	color: #358b9d;
 }
 .has-border-color-turquoise{
 	border-color: #358b9d !important;
+}
+
+.is-orange{
+	color: #ff6d5a
+}
+
+.has-border-color-orange{
+	border-color: #ff6d5a !important;
+}
+
+.button.is-orange{
+	background-color: #ff6d5a;
+    border-color: transparent;
+    color: #fff;
+}
+
+.tabs.is-orange li.is-active a{
+	border-bottom-color: #ff6d5a;
+    color: #ff6d5a;
+}
+
+.datetimepicker-dummy.is-primary .datetimepicker-dummy-wrapper::before,
+.datetimepicker-dummy.is-primary .datetimepicker-dummy-wrapper:before,
+.datetimepicker-dummy.is-primary::before, .datetimepicker-dummy.is-primary:before{
+	    background-color: #ff6d5a !important;
+}
+
+.datetimepicker-dummy.is-primary .datetimepicker-clear-button {
+    color: #ff6d5a !important;
 }

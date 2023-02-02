@@ -9,7 +9,7 @@ export default {
 		
 		<div class="container is-fullhd px-4">
 
-			<div class="tabs is-centered is-boxed">
+			<div class="tabs is-centered is-boxed is-orange">
 				<ul>
 					<li :class="[tabActive =='company' ? 'is-active' : '']">
 						<a v-on:click="tabbSetActive('company')">
