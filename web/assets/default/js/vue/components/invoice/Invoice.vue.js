@@ -18,7 +18,7 @@ export default {
 			/>
 		</div>
 		
-		<div class="column is-3">
+		<div class="column is-4">
 			<BuyersList 
 				:companyData="buyer" 
 			/>

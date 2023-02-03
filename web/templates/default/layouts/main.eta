@@ -34,7 +34,7 @@
 
   <%~ await includeFile('templates/default/layouts/navbar.eta', it) %>
   
-  <section class="section is-medium">
+  <section class="section is-small">
 
     <div class="container is-max-desktop px-4">
       <%~ await includeFile(it.body, it) %>
