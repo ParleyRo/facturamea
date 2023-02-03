@@ -1,4 +1,4 @@
-<nav id="nav" class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
+<nav id="nav" class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="container is-max-desktop">
 
     <div class="navbar-brand">
@@ -32,15 +32,15 @@
             Profile
           </a>
 
-          <div class="navbar-dropdown">
-            <a href="/settings" class="navbar-item">
+          <div class="navbar-dropdown is-boxed is-hoverable">
+            <a href="/settings" class="navbar-item <%= it.meta.url.path === '/settings' ? 'is-active' : '' %>">
               Settings
             </a>
           
             <hr class="navbar-divider">
           
             <a href="/oauth/disconnect" class="navbar-item">
-              Disconnect
+              <span class="icon"><i class="fas fa-sign-out-alt"></i></span>&nbsp;Sign out
             </a>
           
           </div>

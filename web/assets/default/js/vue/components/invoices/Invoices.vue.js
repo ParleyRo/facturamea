@@ -6,7 +6,7 @@ export default {
 <div>
 	
 	<div class="invoices columns is-multiline is-mobile is-justify-content-center" style="overflow: hidden">
-		<div v-for="invoiceItem in invoices" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-one-third-tablet is-one-quarter-desktop ">
+		<div v-for="invoiceItem in invoices" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-one-third-tablet is-one-third-desktop ">
 			<div class="invoiceActions" >
 				<div class="buttons is-justify-content-flex-end">
 					<button class="button is-danger" v-on:click="deleteInvoice(invoiceItem.id,$event)">Delete</button>
