@@ -34,7 +34,13 @@
 
   <%~ await includeFile('templates/default/layouts/navbar.eta', it) %>
   
-  <%~ await includeFile(it.body, it) %>
+  <section class="section is-medium">
+
+    <div class="container is-max-desktop px-4">
+      <%~ await includeFile(it.body, it) %>
+    </div>
+    
+  </section>
 
   <% if (it.js) { %>
     <% it.js.forEach((js) => { %>

@@ -8,60 +8,60 @@ import InvoicesList from "../invoices/InvoicesList.vue.js";
 export default {
 	template: `
 		
-		<div class="container is-fullhd px-4">
+<div>
 
-			<div class="columns is-justify-content-center">
-				
-				<div class="column is-2">
-					<CompaniesList 
-						:companyData="company"
-					/>
-				</div>
-				
-				<div class="column is-3">
-					<BuyersList 
-						:companyData="buyer" 
-					/>
-				</div>
-
-				<div class="column is-2">
-					<InvoicesList 
-						:invoiceData="invoices" 
-					/>
-				</div>
-
-			</div>
-			
-			<div class="is-divider" data-content="Invoice data"></div>
-
-			<InvoiceData 
-				:invoiceData="invoice"
-				:currenciesList="currencies"
+	<div class="columns is-justify-content-center">
+		
+		<div class="column is-3">
+			<CompaniesList 
+				:companyData="company"
 			/>
+		</div>
+		
+		<div class="column is-3">
+			<BuyersList 
+				:companyData="buyer" 
+			/>
+		</div>
 
-			<div class="is-divider" data-content="Invoice rendered"></div>
+		<div class="column is-3">
+			<InvoicesList 
+				:invoiceData="invoices" 
+			/>
+		</div>
 
-			<div class="columns is-justify-content-center is-align-items-end is-multiline">
-				<div class="column is-7">
-					<div class="buttons is-justify-content-flex-end">
-						<button :disabled="saveDisabled" class="button is-info is-outlined" v-on:click="add">Save Invoice</button>
-						<button class="button is-info" v-on:click="printToPdf">Print To Pdf</button>
-					</div>
-				</div>
-			</div>
-			
-			
-			<div id="invoice-render" class="scroll-x">
-				<InvoiceRender
-					:companyData="company.list[company.selected]?.data"
-					:companyFieldsList="company.fields"
-					:buyerData="buyer.list[buyer.selected]?.data"
-					:buyerFieldsList="buyer.fields"
-					:invoiceData="invoice"
-					:currenciesList="currencies"
-				/>
+	</div>
+	
+	<div class="is-divider" data-content="Invoice data"></div>
+
+	<InvoiceData 
+		:invoiceData="invoice"
+		:currenciesList="currencies"
+	/>
+
+	<div class="is-divider" data-content="Invoice rendered"></div>
+
+	<div class="columns is-justify-content-center is-align-items-end is-multiline">
+		<div class="column is-10">
+			<div class="buttons is-justify-content-flex-end">
+				<button :disabled="saveDisabled" class="button is-info is-outlined" v-on:click="add">Save Invoice</button>
+				<button class="button is-info" v-on:click="printToPdf">Print To Pdf</button>
 			</div>
 		</div>
+	</div>
+	
+	
+	<div id="invoice-render" class="scroll-x">
+		<InvoiceRender
+			:companyData="company.list[company.selected]?.data"
+			:companyFieldsList="company.fields"
+			:buyerData="buyer.list[buyer.selected]?.data"
+			:buyerFieldsList="buyer.fields"
+			:invoiceData="invoice"
+			:currenciesList="currencies"
+		/>
+	</div>
+</div>
 	`,
 	props: {
 		companiesData: String,
