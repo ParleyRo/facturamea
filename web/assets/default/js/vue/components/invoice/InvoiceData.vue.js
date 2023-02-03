@@ -7,9 +7,9 @@ export default {
 		<div class="column is-2">
 			<div class="field">
 				<label class="mb-2">Invoice number</label>
-				<div class="control is-small pt-1">
+				<div class="control pt-1">
 					<input 
-						class="input is-small" 
+						class="input" 
 						v-model="invoice.number" 
 						type="text" 
 						placeholder="Invoice number..."
@@ -22,7 +22,7 @@ export default {
 		<div class="column is-2">
 			<label class="mb-2">Currency</label>
 			<div class="control">
-				<div class="select is-small is-fullwidth">
+				<div class="select is-fullwidth">
 					<select v-model="invoice.currency">
 						
 						<option 
@@ -73,7 +73,7 @@ export default {
 					<input 
 						class="input" 
 						type="text" 
-						placeholder="Description..."
+						placeholder="Unit..."
 						:required="true"
 						v-model="product.unit"
 					>
@@ -81,14 +81,14 @@ export default {
 			</div>
 		</div>
 
-		<div class="column is-1">
+		<div class="column is-2">
 			<div class="field">
 				<label class="mb-2">Quantity</label>
 				<div class="control pt-1">
 					<input 
 						class="input" 
 						type="text" 
-						placeholder="Description..."
+						placeholder="Qty..."
 						:required="true"
 						v-model="product.qty"
 					>
@@ -96,14 +96,14 @@ export default {
 			</div>
 		</div>
 
-		<div class="column is-1">
+		<div class="column is-2">
 			<div class="field">
 				<label class="mb-2">Amount</label>
 				<div class="control pt-1">
 					<input 
 						class="input" 
 						type="text" 
-						placeholder="Description..."
+						placeholder="Amount..."
 						:required="true"
 						v-model="product.amount"
 					>
@@ -111,7 +111,7 @@ export default {
 			</div>
 		</div>
 
-		<div class="column is-3 has-text-right">
+		<div class="column is-1 has-text-right">
 			<button v-if="index===0" v-on:click="addProduct" class="button is-info">
 				<span class="icon">
 					<i class="fas fa-plus"></i>
