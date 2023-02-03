@@ -1,4 +1,4 @@
-<nav id="nav" class="navbar is-white" role="navigation" aria-label="main navigation">
+<nav id="nav" class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="container is-max-desktop">
 
     <div class="navbar-brand">
