@@ -6,55 +6,53 @@ import BuyerForm from "../company/CompanyForm.vue.js";
 
 export default {
 	template: `
+<div>
+	<div class="tabs is-centered is-boxed is-orange">
+		<ul>
+			<li :class="[tabActive =='company' ? 'is-active' : '']">
+				<a v-on:click="tabbSetActive('company')">
+					<span class="icon is-small"><i class="fas fa-file-invoice" aria-hidden="true"></i></span>
+					<span>Your company</span>
+				</a>
+			</li>
+			<li :class="[tabActive =='buyer' ? 'is-active' : '']">
+				<a v-on:click="tabbSetActive('buyer')">
+					<span class="icon is-small"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></span>
+					<span>Buyer</span>
+				</a>
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div v-if="tabActive =='company'">
+		<CompaniesList 
+			:companyData="company" 
+		/>
+
+		<div class="is-divider" data-content="Add or Edit companies bellow"></div>
+
+		<CompanyForm 
+			v-on:submited="add"
+			:companyData="company"
+		/>
+	</div>
+
+	<div v-if="tabActive =='buyer'">
+
+		<BuyersList 
+			:companyData="buyer" 
+		/>
 		
-		<div class="container is-fullhd px-4">
+		<div class="is-divider" data-content="Add or Edit companies bellow"></div>
 
-			<div class="tabs is-centered is-boxed is-orange">
-				<ul>
-					<li :class="[tabActive =='company' ? 'is-active' : '']">
-						<a v-on:click="tabbSetActive('company')">
-							<span class="icon is-small"><i class="fas fa-file-invoice" aria-hidden="true"></i></span>
-							<span>Your company</span>
-						</a>
-					</li>
-					<li :class="[tabActive =='buyer' ? 'is-active' : '']">
-						<a v-on:click="tabbSetActive('buyer')">
-							<span class="icon is-small"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></span>
-							<span>Buyer</span>
-						</a>
-					</li>
-					
-				</ul>
-			</div>
-			
-			<div v-if="tabActive =='company'">
-				<CompaniesList 
-					:companyData="company" 
-				/>
-
-				<div class="is-divider" data-content="Add or Edit companies bellow"></div>
-
-				<CompanyForm 
-					v-on:submited="add"
-					:companyData="company"
-				/>
-			</div>
-
-			<div v-if="tabActive =='buyer'">
-
-				<BuyersList 
-					:companyData="buyer" 
-				/>
-				
-				<div class="is-divider" data-content="Add or Edit companies bellow"></div>
-
-				<BuyerForm 
-					v-on:submited="add"
-					:companyData="buyer"
-				/>
-			</div>
-			
-		</div>
+		<BuyerForm 
+			v-on:submited="add"
+			:companyData="buyer"
+		/>
+	</div>
+	
+</div>
 	`,
 	props: {
 		companiesData: String,

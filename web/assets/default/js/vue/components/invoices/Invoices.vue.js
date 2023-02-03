@@ -3,30 +3,31 @@ import InvoiceRender from "../invoice/InvoiceRender.vue.js";
 export default {
 	template: `
 		
-		<div class="container is-fullhd px-4">
-			
-			<div class="invoices columns is-multiline is-mobile is-justify-content-center" style="overflow: hidden">
-				<div v-for="invoiceItem in invoices" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-one-third-tablet is-one-quarter-desktop ">
-					<div class="invoiceActions" >
-						<div class="buttons is-justify-content-flex-end">
-							<button class="button is-danger" v-on:click="deleteInvoice(invoiceItem.id,$event)">Delete</button>
-							<button class="button is-info" v-on:click="printToPdf">Print To Pdf</button>
-						</div>
-					</div>
-					<div class="invoiceContainer custom-scroll scroll-x">
-						<h1 class="has-text-centered">{{invoiceItem.number}}</h1>
-						<InvoiceRender
-							:companyData="companies[invoiceItem.id_company]?.data"
-							:companyFieldsList="fieldsCompany"
-							:buyerData="buyers[invoiceItem.id_buyer]?.data"
-							:buyerFieldsList="fieldsBuyer"
-							:invoiceData="invoiceItem"
-							:currenciesList="currencies"
-						/>
-					</div>
+<div>
+	
+	<div class="invoices columns is-multiline is-mobile is-justify-content-center" style="overflow: hidden">
+		<div v-for="invoiceItem in invoices" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-one-third-tablet is-one-quarter-desktop ">
+			<div class="invoiceActions" >
+				<div class="buttons is-justify-content-flex-end">
+					<button class="button is-danger" v-on:click="deleteInvoice(invoiceItem.id,$event)">Delete</button>
+					<button class="button is-info" v-on:click="printToPdf">Print To Pdf</button>
 				</div>
 			</div>
+			<div class="invoiceContainer custom-scroll scroll-x">
+				<h1 class="has-text-centered">{{invoiceItem.number}}</h1>
+				<InvoiceRender
+					:companyData="companies[invoiceItem.id_company]?.data"
+					:companyFieldsList="fieldsCompany"
+					:buyerData="buyers[invoiceItem.id_buyer]?.data"
+					:buyerFieldsList="fieldsBuyer"
+					:invoiceData="invoiceItem"
+					:currenciesList="currencies"
+				/>
+			</div>
 		</div>
+	</div>
+	
+</div>
 	`,
 	props: {
 		invoicesData: String,

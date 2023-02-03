@@ -1,40 +1,52 @@
-<nav id="nav" class="navbar mb-6 is-white" role="navigation" aria-label="main navigation">
- 
-  <div class="navbar-brand">
-    
-    <a class="navbar-item" href="/">
-      <img src="/assets/default/img/logo.png" >
-    </a>
+<nav id="nav" class="navbar is-white" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
 
-    <a role="button" :class="{ 'is-active': isActive }" @click="toggleActive" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <div class="navbar-brand">
+      
+      <a class="navbar-item" href="/">
+        <img src="/assets/default/img/logo.png" >
+      </a>
 
-  </div>
-
-  <div :class="{ 'is-active': isActive }" class="navbar-menu" id="navbarMenu">
-
-    <div class="navbar-start">
-
-      <a href="/" class="<%= it.meta.url.path === '/' ? 'is-active' : '' %> navbar-item">Invoice</a>
-      <% /* <a href="/invoice" class="navbar-item">Invoice</a> */ %>
-      <a href="/invoices" class="<%= it.meta.url.path === '/invoices' ? 'is-active' : '' %> navbar-item">Invoices</a>
-      <a href="/settings" class="<%= it.meta.url.path === '/settings' ? 'is-active' : '' %> navbar-item">Settings</a>
+      <a role="button" :class="{ 'is-active': isActive }" @click="toggleActive" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
 
     </div>
 
-    <div class="navbar-end">
+    <div :class="{ 'is-active': isActive }" class="navbar-menu" id="navbarMenu">
 
-      <div class="navbar-item">
+      <div class="navbar-start">
 
-          <div class="buttons">
-            <a href="/oauth/disconnect" class="button is-light">Disconnect</a>
-          </div>
+        <a href="/" class="<%= it.meta.url.path === '/' ? 'is-active' : '' %> navbar-item">Invoice</a>
+        <a href="/invoices" class="<%= it.meta.url.path === '/invoices' ? 'is-active' : '' %> navbar-item">Invoices</a>
 
-        </div>
       </div>
+
+      <div class="navbar-end">
+
+        <div class="navbar-item has-dropdown is-hoverable">
+
+          <a class="navbar-link">
+            Profile
+          </a>
+
+          <div class="navbar-dropdown">
+            <a href="/settings" class="navbar-item">
+              Settings
+            </a>
+          
+            <hr class="navbar-divider">
+          
+            <a href="/oauth/disconnect" class="navbar-item">
+              Disconnect
+            </a>
+          
+          </div>
+        </div>
+
+    </div>
 
   </div>
 </nav>

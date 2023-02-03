@@ -1,67 +1,67 @@
 export default {
 	template: `
-		<div class="container mt-6">
+<div class="container mt-6">
 
-			<div class="has-text-centered"><img src="/assets/default/img/logo_large.png" width="112" height="28"></div>
-			<form 
-				method="post"
-				action="/oauth/connect"
-				@submit="checkForm"
-			>
-				<div class="columns is-centered is-vcentered is-centered">
-					<div class="column is-one-third">
-						<div class="box">
-							<p class="title is-size-4 has-text-centered">Sign In</p>
-							<div class="field">
-								<div class="control has-icons-left has-icons-right">
-									<input v-on:keyup="fieldChanged('username')" v-model="username.value" name="username" class="input" type="text" placeholder="Username/Email">
-									<span class="icon is-small is-left">
-										<i class="fas fa-user"></i>
-									</span>
-									<span 
-										class="icon is-small is-right"
-										:class=[username.classes]
-									>
-										<i class="fas fa-check"></i>
-									</span>
-								</div>
-								<p v-if="errors.username" class="help is-danger">{{errors.username}}</p>
-							</div>
-							
-							<div class="field">
-								<div class="control has-icons-left has-icons-right">
-									<input v-on:keyup="fieldChanged('password')" v-model="password.value" name="password" class="input" type="password" placeholder="Password" autocomplete="on">
-									<span class="icon is-small is-left">
-										<i class="fas fa-lock"></i>
-									</span>
-									<span 
-										class="icon is-small is-right"
-										:class=[password.classes]
-									>
-										<i class="fas fa-check"></i>
-									</span>
-								</div>
-								<p v-if="errors.password" class="help is-danger">{{errors.password}}</p>
-							</div>
-							
-							<div class="field">
-								<p class="control">
-									<button class="button is-orange">
-										Login
-									</button>
-								</p>
-							</div>
-
-							<div v-if="errors.default" class="field has-text-centered">
-								<span class="tag is-danger is-light">{{errors.default}}</span>
-							</div>
+	<div class="has-text-centered"><img src="/assets/default/img/logo_large.png" width="112" height="28"></div>
+	<form 
+		method="post"
+		action="/oauth/connect"
+		@submit="checkForm"
+	>
+		<div class="columns is-centered is-vcentered is-centered">
+			<div class="column is-one-third">
+				<div class="box">
+					<p class="title is-size-4 has-text-centered">Sign In</p>
+					<div class="field">
+						<div class="control has-icons-left has-icons-right">
+							<input v-on:keyup="fieldChanged('username')" v-model="username.value" name="username" class="input" type="text" placeholder="Username/Email">
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
+							<span 
+								class="icon is-small is-right"
+								:class=[username.classes]
+							>
+								<i class="fas fa-check"></i>
+							</span>
 						</div>
+						<p v-if="errors.username" class="help is-danger">{{errors.username}}</p>
+					</div>
+					
+					<div class="field">
+						<div class="control has-icons-left has-icons-right">
+							<input v-on:keyup="fieldChanged('password')" v-model="password.value" name="password" class="input" type="password" placeholder="Password" autocomplete="on">
+							<span class="icon is-small is-left">
+								<i class="fas fa-lock"></i>
+							</span>
+							<span 
+								class="icon is-small is-right"
+								:class=[password.classes]
+							>
+								<i class="fas fa-check"></i>
+							</span>
+						</div>
+						<p v-if="errors.password" class="help is-danger">{{errors.password}}</p>
+					</div>
+					
+					<div class="field">
+						<p class="control">
+							<button class="button is-orange">
+								Login
+							</button>
+						</p>
+					</div>
 
+					<div v-if="errors.default" class="field has-text-centered">
+						<span class="tag is-danger is-light">{{errors.default}}</span>
 					</div>
 				</div>
-			</form>
 
+			</div>
 		</div>
+	</form>
+
+</div>
 	`,
 	props: {
 		

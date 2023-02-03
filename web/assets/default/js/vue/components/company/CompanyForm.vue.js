@@ -1,41 +1,41 @@
 export default {
 	template: `
-		<form 
-			method="post"
-			:action="formAction"
-			@submit.prevent="checkForm"
-			
-		>
-			<div class="columns is-multiline is-mobile is-align-items-end">
+<form 
+	method="post"
+	:action="formAction"
+	@submit.prevent="checkForm"
+	
+>
+	<div class="columns is-multiline is-mobile is-align-items-end">
 
-				<div v-for="(fieldName, index) in company.fields" :key="index" class="column is-half">
+		<div v-for="(fieldName, index) in company.fields" :key="index" class="column is-half">
 
-					<div class="field">
-						<label class="mb-2">{{formatCamelCaseToText(fieldName)}}</label>
-						<div class="control is-small pt-1">
-							<input 
-								:id="fieldName"
-								class="input is-small" 
-								type="text" 
-								:placeholder="formatCamelCaseToText(fieldName) + ' ...'"
-								v-model="formData[fieldName]"
-							>
-						</div>
-					</div>
-
-				</div>
-			
-			</div>
-			
-			<div class="columns">
-				<div class="column">
-					<div class="control">
-						<button class="button is-orange pl-6 pr-6">Submit</button>
-					</div>
+			<div class="field">
+				<label class="mb-2">{{formatCamelCaseToText(fieldName)}}</label>
+				<div class="control is-small pt-1">
+					<input 
+						:id="fieldName"
+						class="input is-small" 
+						type="text" 
+						:placeholder="formatCamelCaseToText(fieldName) + ' ...'"
+						v-model="formData[fieldName]"
+					>
 				</div>
 			</div>
-			
-		</form>
+
+		</div>
+	
+	</div>
+	
+	<div class="columns">
+		<div class="column">
+			<div class="control">
+				<button class="button is-orange pl-6 pr-6">Submit</button>
+			</div>
+		</div>
+	</div>
+	
+</form>
 	`,
 	data() {
 
