@@ -6,7 +6,7 @@ export default {
 <div>
 	
 	<div class="invoices columns is-multiline is-mobile is-justify-content-center" style="overflow: hidden">
-		<div v-for="invoiceItem in invoices" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-one-third-tablet is-one-third-desktop ">
+		<div v-for="invoiceItem in invoices" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-half-tablet is-one-third-desktop ">
 			<div class="invoiceActions" >
 				<div class="buttons is-justify-content-flex-end">
 					<button class="button is-danger" v-on:click="deleteInvoice(invoiceItem.id,$event)">Delete</button>
@@ -14,7 +14,7 @@ export default {
 				</div>
 			</div>
 			<div class="invoiceContainer custom-scroll scroll-x">
-				<h1 class="has-text-centered">{{invoiceItem.number}}</h1>
+				<h1 class="has-text-centered pt-1">{{invoiceItem.number}} - {{ (new Date(invoiceItem.date)).toLocaleDateString('ro-RO',{year: "numeric", month: "numeric", day: "numeric"}) }}</h1>
 				<InvoiceRender
 					:companyData="companies[invoiceItem.id_company]?.data"
 					:companyFieldsList="fieldsCompany"

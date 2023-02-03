@@ -44,8 +44,8 @@
 }
 .invoiceItem .invoiceContainer {
     position: absolute;
-    left: calc((-1)*(21cm / 3) - .75rem);
-    top: calc((-1) * (29.7cm / 3) - 3rem);
+    left: calc((-1)*(21cm / 3) + .75rem);
+    top: calc((-1) * (29.7cm / 3) );
     transform: scale(0.33);
     transition: transform 0.5s ease-out, left 0.2s ease-out;
 }
