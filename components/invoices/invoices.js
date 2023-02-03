@@ -13,7 +13,7 @@ class Invoices  {
 		
 		if (!idUser) throw {"error":"bad-query","message":"idUser required"} 
 
-		const result = await db.query("SELECT * FROM invoice WHERE id_user = ? ORDER BY id DESC",[idUser]);
+		const result = await db.query("SELECT * FROM invoice WHERE id_user = ? ORDER BY date DESC",[idUser]);
 		
 		return new Invoices(result);
 	}
