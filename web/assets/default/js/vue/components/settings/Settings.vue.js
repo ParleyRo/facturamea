@@ -55,10 +55,10 @@ export default {
 </div>
 	`,
 	props: {
-		companiesData: String,
-		buyersData: String,
-		availableFieldsCompany: String,
-		availableFieldsBuyer: String
+		companiesData: Object,
+		buyersData: Object,
+		availableFieldsCompany: Array,
+		availableFieldsBuyer: Array
 	},
 	data() {
 
@@ -66,14 +66,14 @@ export default {
 			tabActive: 'company',
 			company:{
 				selected: "",
-				fields: JSON.parse(this.availableFieldsCompany),
-				list: JSON.parse(this.companiesData),
+				fields: this.availableFieldsCompany,
+				list: this.companiesData,
 				label: "company",
 			},
 			buyer:{
 				selected: "",
-				fields: JSON.parse(this.availableFieldsBuyer),
-				list: JSON.parse(this.buyersData),
+				fields: this.availableFieldsBuyer,
+				list: this.buyersData,
 				label: "buyer",
 			}
 		}

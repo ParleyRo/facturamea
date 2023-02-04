@@ -1,12 +1,12 @@
 
 <div id="invoices">
 	<invoices
-		invoices-data="<%= JSON.stringify(it.invoicesData || {}) %>" 
-		companies-data="<%= JSON.stringify(it.companiesData || {}) %>" 
-		buyers-data="<%= JSON.stringify(it.buyersData || {}) %>"
-		available-fields-company = "<%= JSON.stringify(it.availableFieldsCompany || {}) %>"
-		available-fields-buyer = "<%= JSON.stringify(it.availableFieldsBuyer || {}) %>"
-		available-currencies = "<%= JSON.stringify(it.availableCurrencies || {}) %>"
+		:invoices-data="invoicesData" 
+		:companies-data="companiesData" 
+		:buyers-data="buyersData"
+		:available-fields-company = "availableFieldsCompany"
+		:available-fields-buyer = "availableFieldsBuyer"
+		:available-currencies = "availableCurrencies"
 	>
 	</invoices>
 </div>
@@ -18,7 +18,22 @@
 	
 	import Invoices from "/assets/default/js/vue/components/invoices/Invoices.vue.js";
 
-	const invoices = createApp({components: {Invoices}});
+	const invoices = createApp({
+		data() {
+			return {
+				availableFieldsBuyer: <%~ JSON.stringify(it.availableFieldsBuyer) %>,
+				availableFieldsCompany: <%~ JSON.stringify(it.availableFieldsCompany) %>,
+				buyersData: <%~ JSON.stringify(it.buyersData) %>,
+				companiesData: <%~ JSON.stringify(it.companiesData) %>,
+				availableCurrencies: <%~ JSON.stringify(it.availableCurrencies) %>,
+				invoicesData: <%~ JSON.stringify(it.invoicesData) %>
+			}
+		},
+		components: {
+			Invoices
+		}
+	
+	});
 
 	invoices.mount('#invoices');
 

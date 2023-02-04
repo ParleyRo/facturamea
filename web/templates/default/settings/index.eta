@@ -1,10 +1,10 @@
 
 <div id="settings">
 	<settings 
-		companies-data="<%= JSON.stringify(it.companiesData || {}) %>" 
-		buyers-data="<%= JSON.stringify(it.buyersData || {}) %>"
-		available-fields-company = "<%= JSON.stringify(it.availableFieldsCompany || {}) %>"
-		available-fields-buyer = "<%= JSON.stringify(it.availableFieldsBuyer || {}) %>"
+		:companies-data="companiesData" 
+		:buyers-data="buyersData"
+		:available-fields-company = "availableFieldsCompany"
+		:available-fields-buyer = "availableFieldsBuyer"
 	>
 	</settings>
 </div>
@@ -15,7 +15,20 @@
 	
 	import Settings from "/assets/default/js/vue/components/settings/Settings.vue.js";
 
-	const settings = createApp({components: {Settings}});
+	const settings = createApp({
+		data() {
+			return {
+				availableFieldsBuyer: <%~ JSON.stringify(it.availableFieldsBuyer) %>,
+				availableFieldsCompany: <%~ JSON.stringify(it.availableFieldsCompany) %>,
+				buyersData: <%~ JSON.stringify(it.buyersData) %>,
+				companiesData: <%~ JSON.stringify(it.companiesData) %>
+			}
+		},
+		components: {
+			Settings
+		}
+	
+	});
 
 	settings.mount('#settings');
 
