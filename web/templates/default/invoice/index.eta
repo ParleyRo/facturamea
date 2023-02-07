@@ -1,11 +1,11 @@
 <div id="invoice">
 	<invoice
-		companies-data="<%= JSON.stringify(it.companiesData || {}) %>" 
-		buyers-data="<%= JSON.stringify(it.buyersData || {}) %>"
-		available-fields-company = "<%= JSON.stringify(it.availableFieldsCompany || {}) %>"
-		available-fields-buyer = "<%= JSON.stringify(it.availableFieldsBuyer || {}) %>"
-		available-currencies = "<%= JSON.stringify(it.availableCurrencies || {}) %>"
-		invoices-data="<%= JSON.stringify(it.invoicesData || {}) %>" 
+		:invoices-data="invoicesData" 
+		:companies-data="companiesData" 
+		:buyers-data="buyersData"
+		:available-fields-company = "availableFieldsCompany"
+		:available-fields-buyer = "availableFieldsBuyer"
+		:available-currencies = "availableCurrencies"
 	>
 	</invoice>
 </div>
@@ -17,8 +17,23 @@
 	
 	import Invoice from "/assets/default/js/vue/components/invoice/Invoice.vue.js";
 
-	const invoice = createApp({components: {Invoice}});
+	const invoice = createApp({
+		data() {
+			return {
+				availableFieldsBuyer: <%~ JSON.stringify(it.availableFieldsBuyer) %>,
+				availableFieldsCompany: <%~ JSON.stringify(it.availableFieldsCompany) %>,
+				buyersData: <%~ JSON.stringify(it.buyersData) %>,
+				companiesData: <%~ JSON.stringify(it.companiesData) %>,
+				availableCurrencies: <%~ JSON.stringify(it.availableCurrencies) %>,
+				invoicesData: <%~ JSON.stringify(it.invoicesData) %>
+			}
+		},
+		components: {
+			Invoice
+		}
+	});
     invoice.config.globalProperties.globalVar = 'globalVar'
+
 	invoice.mount('#invoice');
 
 </script>

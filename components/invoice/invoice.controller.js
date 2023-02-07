@@ -35,8 +35,10 @@ module.exports = {
 		oData['availableCurrencies'] = await Invoice.getCurrencies();
 		
 		const oInvoicesData = await rpc.invoices.get({
-			idUser: params.auth?.user?.id
+			idUser: params.auth?.user?.id,
+			limit: 10
 		});
+
 		oData['invoicesData'] = {};
 		for( let index in oInvoicesData){
 			oData['invoicesData'][oInvoicesData[index].id] = oInvoicesData[index]

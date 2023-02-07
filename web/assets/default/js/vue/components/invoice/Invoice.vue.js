@@ -64,12 +64,12 @@ export default {
 </div>
 	`,
 	props: {
-		companiesData: String,
-		buyersData: String,
-		invoicesData: String,
-		availableFieldsCompany: String,
-		availableFieldsBuyer: String,
-		availableCurrencies: String
+		invoicesData: Object,
+		companiesData: Object,
+		buyersData: Object,
+		availableFieldsCompany: Array,
+		availableFieldsBuyer: Array,
+		availableCurrencies: Object
 	},
 	data() {
 
@@ -79,21 +79,21 @@ export default {
 			saveDisabled: true,
 			invoices:{
 				selected: "",
-				list: JSON.parse(this.invoicesData),
+				list: this.invoicesData,
 			},
 			company:{
 				selected: "",
-				list: JSON.parse(this.companiesData),
-				fields: JSON.parse(this.availableFieldsCompany),
+				list: this.companiesData,
+				fields: this.availableFieldsCompany,
 				label: "company"
 			},
 			buyer:{
 				selected: "",
-				list: JSON.parse(this.buyersData),
-				fields: JSON.parse(this.availableFieldsBuyer),
+				list: this.buyersData,
+				fields: this.availableFieldsBuyer,
 				label: "buyer"
 			},
-			currencies: JSON.parse(this.availableCurrencies),
+			currencies: this.availableCurrencies,
 			invoice:{
 				date: new Date(),
 				dueDate: new Date(Date.now() + dueDateTime ),
@@ -150,6 +150,14 @@ export default {
 	methods:{
 
 		add: async function(){
+
+			const found = Object.keys(this.invoices.list).find(key => this.invoices.list[key].number == this.invoice.number);
+			
+			if(found){
+				if(!confirm(`Do you really want to update invoice with number ${this.invoice.number} ?`)){
+					return;
+				}	
+			}
 
 			const oData = {
 				id_company: this.company.list[this.company.selected].id,

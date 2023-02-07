@@ -6,7 +6,7 @@ export default {
 <div>
 	
 	<div class="invoices columns is-multiline is-mobile is-justify-content-center" style="overflow: hidden">
-		<div v-for="invoiceItem in invoices" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-half-tablet is-one-third-desktop ">
+		<div v-for="invoiceItem in invoicesData" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-half-tablet is-one-third-desktop ">
 			<div class="invoiceActions" >
 				<div class="buttons is-justify-content-flex-end">
 					<button class="button is-danger" v-on:click="deleteInvoice(invoiceItem.id,$event)">Delete</button>
@@ -16,12 +16,12 @@ export default {
 			<div class="invoiceContainer custom-scroll scroll-x">
 				<h1 class="has-text-centered pt-1">{{invoiceItem.number}} - {{ (new Date(invoiceItem.date)).toLocaleDateString('ro-RO',{year: "numeric", month: "numeric", day: "numeric"}) }}</h1>
 				<InvoiceRender
-					:companyData="companies[invoiceItem.id_company]?.data"
-					:companyFieldsList="fieldsCompany"
-					:buyerData="buyers[invoiceItem.id_buyer]?.data"
-					:buyerFieldsList="fieldsBuyer"
+					:companyData="companiesData[invoiceItem.id_company]?.data"
+					:companyFieldsList="availableFieldsCompany"
+					:buyerData="buyersData[invoiceItem.id_buyer]?.data"
+					:buyerFieldsList="availableFieldsBuyer"
 					:invoiceData="invoiceItem"
-					:currenciesList="currencies"
+					:currenciesList="availableCurrencies"
 				/>
 			</div>
 		</div>
@@ -30,25 +30,12 @@ export default {
 </div>
 	`,
 	props: {
-		invoicesData: String,
-		companiesData: String,
-		buyersData: String,
-		availableFieldsCompany: String,
-		availableFieldsBuyer: String,
-		availableCurrencies: String
-	},
-	data() {
-
-		return {
-			invoices: JSON.parse(this.invoicesData),
-			companies: JSON.parse(this.companiesData),
-			buyers: JSON.parse(this.buyersData),
-			fieldsCompany: JSON.parse(this.availableFieldsCompany),
-			fieldsBuyer: JSON.parse(this.availableFieldsBuyer),
-			currencies: JSON.parse(this.availableCurrencies),
-			actionsActive: false
-		}
-		
+		invoicesData: Object,
+		companiesData: Object,
+		buyersData: Object,
+		availableFieldsCompany: Array,
+		availableFieldsBuyer: Array,
+		availableCurrencies: Object
 	},
 	methods:{
 		toggleActive(e){

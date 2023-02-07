@@ -4,7 +4,7 @@ const Controller = require('./invoices.controller');
 
 function handlers(namespace) {
 	rpc.setNamespace(namespace)
-	.register('get', async ({idUser}) => await Controller.get({idUser}))
+	.register('get', async ({idUser,id,orderBy,limit}) => await Controller.get({idUser,id,orderBy,limit}))
 }
 
 module.exports = handlers
