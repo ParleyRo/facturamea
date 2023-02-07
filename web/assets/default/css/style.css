@@ -65,3 +65,20 @@ table{
     background-color: rgba(28,157,234,0.15)
 }
 
+.field.dropdown-item{
+  padding: 0px;
+  margin-bottom: 0px;
+}
+
+.field.dropdown-item input{
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+  margin-bottom: 0px;
+}
+.dropdown.is-fullwidth{
+    width: 100%;
+}
+.dropdown-trigger.is-fullwidth{
+    width: 100%;
+}

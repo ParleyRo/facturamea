@@ -33,6 +33,7 @@
 		}
 	});
     invoice.config.globalProperties.globalVar = 'globalVar'
+
 	invoice.mount('#invoice');
 
 </script>

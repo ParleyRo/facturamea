@@ -151,6 +151,14 @@ export default {
 
 		add: async function(){
 
+			const found = Object.keys(this.invoices.list).find(key => this.invoices.list[key].number == this.invoice.number);
+			
+			if(found){
+				if(!confirm(`Do you really want to update invoice with number ${this.invoice.number} ?`)){
+					return;
+				}	
+			}
+
 			const oData = {
 				id_company: this.company.list[this.company.selected].id,
 				id_buyer: this.buyer.list[this.buyer.selected].id,

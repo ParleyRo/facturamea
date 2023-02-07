@@ -20,6 +20,25 @@ const InvoicesAPI = {
 
 		},
 		url:'/invoices'
+	},
+	getSearch: {
+		handler: async (request,reply) => {
+
+			if(request.auth == null){
+				return reply.redirect('/',200);
+			}
+			
+			const response = await Controller.search({
+				idUser: request.auth.user.id,
+				needle: request.params.needle
+			});
+			
+			return {
+				state: 'success',
+				data: response
+			}
+		},
+		url:'/invoices/search/:needle'
 	}
 
 }
