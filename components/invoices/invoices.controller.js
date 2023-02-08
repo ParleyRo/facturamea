@@ -36,7 +36,7 @@ module.exports = {
 
 		return oData
 	},
-	async get({idUser,limit = false,id = false,orderBy = 'date Desc'}){
+	async get({idUser,limit,id,orderBy}){
 		return await Invoices.get({idUser,limit,id,orderBy})
 	},
 	async search({idUser,needle}){

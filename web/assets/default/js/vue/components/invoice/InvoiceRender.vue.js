@@ -35,7 +35,7 @@ export default {
 				</p>
 
 				<p class="">
-					Due-Date(dd.mm.yyyy): <b>{{ (new Date(invoiceData.dueDate)).toLocaleDateString('ro-RO',{year: "numeric", month: "numeric", day: "numeric"}) }}</b>
+					Due-Date(dd.mm.yyyy): <b>{{ (new Date(invoiceData.dueDate || invoiceData.due_date)).toLocaleDateString('ro-RO',{year: "numeric", month: "numeric", day: "numeric"}) }}</b>
 				</p>
 
 			</div>

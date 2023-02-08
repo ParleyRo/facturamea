@@ -9,6 +9,8 @@
     font-family: sans-serif;
     border: 1px solid #dedede;
     border-radius: 3px;
+    transform: scale(1);
+    background: #fff;
 }
 .invoiceContent:hover{
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -51,10 +53,11 @@
 }
 
 .invoiceItem:hover .invoiceContainer {
-    transform: scale(0.36);
+    transform: scale(0.5);
+    z-index: 1;
 }
 .invoiceItem h1{
-    transform: scale(3);
+    font-size: 300%;
 }
 .invoiceItem.is-active .invoiceContainer{
     position: fixed;
@@ -65,7 +68,7 @@
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 15px 0px;
     background: #fff;
     overflow-y: scroll;
-    max-height: calc(100vh - 170px);
+    max-height: calc(80vh);
 }
 
 .invoiceItem.is-active h1{

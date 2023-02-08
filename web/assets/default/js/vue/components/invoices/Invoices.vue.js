@@ -5,7 +5,7 @@ export default {
 		
 <div>
 	
-	<div class="invoices columns is-multiline is-mobile is-justify-content-center" style="overflow: hidden">
+	<div class="invoices columns is-multiline is-mobile is-justify-content-center">
 		<div v-for="invoiceItem in invoicesData" v-on:click="toggleActive" :key="invoiceItem.id" class="invoiceItem column is-full-mobile is-half-tablet is-one-third-desktop ">
 			<div class="invoiceActions" >
 				<div class="buttons is-justify-content-flex-end">

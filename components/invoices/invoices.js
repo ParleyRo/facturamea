@@ -3,13 +3,13 @@ const db = require('../../libraries/database.js');
 class Invoices  {
 
 	constructor(data) {
-
+		
 		for (const [key,value] of Object.entries(data)) {
 			this[key] = value;
 		}
 	}
 	
-	static async get({idUser,id,orderBy,limit}){
+	static async get({idUser,id=false,orderBy = 'date Desc',limit=false}){
 		
 		if (!idUser) throw {"error":"bad-query","message":"idUser required"} 
 
@@ -24,7 +24,6 @@ class Invoices  {
 			limit: ``
 		}
 
-
 		if(id !== false){
 			oSql['and'] = `AND invoice.id = ?`;
 			aParams.push(id);
@@ -32,7 +31,7 @@ class Invoices  {
 		if(orderBy !== false){
 			oSql['order'] = `ORDER BY ${orderBy}`;
 		}
-		if(orderBy !== false){
+		if(limit !== false){
 			oSql['limit'] = `LIMIT ${limit}`;
 		}
 
