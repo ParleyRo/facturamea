@@ -32,6 +32,7 @@ const InvoiceAPI = {
 				id_buyer: request.body.id_buyer,
 				number: request.body.number,
 				currency: request.body.currency,
+				rate: request.body.rate,
 				date: new Date(request.body.date),
 				due_date: new Date(request.body.due_date),
 				products: JSON.stringify(request.body.products)

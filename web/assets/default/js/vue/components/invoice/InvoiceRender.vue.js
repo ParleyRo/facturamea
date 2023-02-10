@@ -63,29 +63,61 @@ export default {
 						<th align>Description<br />(Denumirea produselor sau a serviciilor)</th>
 						<th align>Unit<br />(U.M.)</th>
 						<th align>Quantity<br />(Cantitate)</th>
-						<th align>Unit price<br />(-{{currenciesList[invoiceData.currency].label}}-)</th>
-						<th align>Total Amount<br />(-{{currenciesList[invoiceData.currency].label}}-)</th>
+						<th align>
+							Unit price
+							<br />
+							(-{{currenciesList[invoiceData.currency].label}}-)
+							<template v-if="invoiceData.currency != 'ron'">
+								<br />
+								<small>(-ron-)</small>
+							</template>
+						</th>
+						<th align>
+							Total Amount
+							<br />
+							(-{{currenciesList[invoiceData.currency].label}}-)
+							<template v-if="invoiceData.currency != 'ron'">
+								<br />
+								<small>(-ron-)</small>
+							</template>
+						</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<tr v-for="(product, index) in invoiceData.products">
 						<td>{{index+1}}</td>
-						<td>{{product.name}}</td>
+						<td><div style="max-width: 350px;margin: 0 auto;">{{product.name}}</div></td>
 						<td>{{product.unit}}</td>
 						<td>{{product.qty}}</td>
-						<td>{{product.amount}}</td>
-						<td>{{product.qty * product.amount}}</td>
+						<td>
+							<b>{{beautifyNumber(product.amount)}}</b>
+							<template v-if="invoiceData.currency != 'ron'">
+								<br />
+								<small>({{beautifyNumber(product.amount * invoiceData.rate)}})</small>
+							</template>
+						</td>
+						<td>
+							<b>{{beautifyNumber(product.qty * product.amount)}}</b>
+							<template v-if="invoiceData.currency != 'ron'">
+								<br />
+								<small>({{beautifyNumber(product.qty * product.amount * invoiceData.rate)}})</small>
+							</template>
+						</td>
 					</tr> 
 
 					<tr>
 						<td colspan="5">
 							<span><b>Invoice Total -{{currenciesList[invoiceData.currency].label}}-</b>  </span>
 							<br />
-							<small><i>(Valoare totală de plată factura curentă -{{currenciesList[invoiceData.currency].label}}-)</i></small>
+							<small><i>(Valoare totală de plată factura curentă -RON-)</i></small>
 						</td>
 						<td>
-							<b>{{invoiceData.products.reduce(function (total, product) { return total + (product.qty * product.amount); }, 0)}}</b>
+							<b>{{beautifyNumber( invoiceData.products.reduce(function (total, product) { return total + (product.qty * product.amount); }, 0) )}}</b>
+							<template v-if="invoiceData.currency != 'ron'">
+								<br />
+								<small>({{beautifyNumber( invoiceData.products.reduce(function (total, product) { return total + (product.qty * product.amount * invoiceData.rate); }, 0) )}})</small>
+							</template>
 						</td>
 					</tr>
 				</tbody>
@@ -131,6 +163,14 @@ export default {
 			const sFormatText = sText.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1");
 			
 			return sFormatText.charAt(0).toUpperCase() + sFormatText.slice(1);
+
+		},
+		beautifyNumber(number){
+
+			if( (typeof number == 'number') && !isNaN(number) && !Number.isInteger(number) ){
+				number = number.toFixed(2);
+			}
+			return (number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 		}
 	}
