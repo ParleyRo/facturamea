@@ -37,6 +37,7 @@ export default {
 	<InvoiceData 
 		:invoiceData="invoice"
 		:currenciesList="currencies"
+		:currencyValue="currencyValue"
 	/>
 
 	<div class="is-divider" data-content="Invoice rendered"></div>
@@ -59,6 +60,7 @@ export default {
 			:buyerFieldsList="buyer.fields"
 			:invoiceData="invoice"
 			:currenciesList="currencies"
+			:currencyValue="currencyValue"
 		/>
 	</div>
 </div>
@@ -94,6 +96,7 @@ export default {
 				label: "buyer"
 			},
 			currencies: this.availableCurrencies,
+			currencyValue: 1,
 			invoice:{
 				date: new Date(),
 				dueDate: new Date(Date.now() + dueDateTime ),
@@ -118,6 +121,47 @@ export default {
 			handler(newValue, oldValue) {
 				this.saveDisabled = false;
 			}
+		},
+		'invoice.currency': async function(newVal, oldVal){
+
+			if(this.invoice.currency === 'ron'){
+				return;
+			}
+
+			if(newVal === oldVal){
+				return;
+			}
+			
+			this.currencyValue = '';
+			const oDataCurrency = await this.getCurrency({
+				year: this.invoice.date.getFullYear(),
+				month: this.invoice.date.getMonth()+1,
+				day: this.invoice.date.getDate(),
+				currency: this.invoice.currency
+			})
+
+			this.currencyValue = oDataCurrency.value
+		},
+		'invoice.date': async function(newVal, oldVal){
+			
+			if(this.invoice.currency === 'ron'){
+				return;
+			}
+
+			if(newVal === oldVal){
+				return;
+			}
+
+			this.currencyValue = '';
+			
+			const oDataCurrency = await this.getCurrency({
+				year: newVal.getFullYear(),
+				month: newVal.getMonth()+1,
+				day: newVal.getDate(),
+				currency: this.invoice.currency
+			})
+
+			this.currencyValue = oDataCurrency.value
 		},
 		invoices: {
 			deep: true,
@@ -148,7 +192,16 @@ export default {
 		}
 	},
 	methods:{
+		getCurrency: async function({year,month,day,currency}){
+			const response = await fetch(`/cursbnr/${year}/${month}/${day}/${currency}`,{
+				method: 'get',
+				headers: {'Content-Type': 'application/json'}
+			});
+			
+			const oData = await response.json();
 
+			return oData
+		},
 		add: async function(){
 
 			const found = Object.keys(this.invoices.list).find(key => this.invoices.list[key].number == this.invoice.number);
