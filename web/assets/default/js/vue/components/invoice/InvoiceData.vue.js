@@ -19,8 +19,16 @@ export default {
 			</div>
 		</div>
 
-		<div class="column is-2">
-			<label class="mb-2">Currency</label>
+		<div class="column is-2 is-relative">
+			<label class="mb-2">Currency </label>
+			<span 
+				:class="[currencyValue == '' ? 'is-loading' : '']"
+				class="tag is-info is-light"
+				style="position: absolute;bottom: -10px;right: 0.75rem;" 
+				v-if="invoice.currency != 'ron'"
+			>
+				<b v-if="currencyValue != ''">{{currencyValue}} ron</b>
+			</span>
 			<div class="control">
 				<div class="select is-fullwidth">
 					<select v-model="invoice.currency">
@@ -138,7 +146,8 @@ export default {
 	},
 	props: {
 		invoiceData: Object,
-		currenciesList: Object
+		currenciesList: Object,
+		currencyValue: String
 	},
 	methods:{
 		addProduct: function(){

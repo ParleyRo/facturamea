@@ -13,11 +13,13 @@
     "fastify": "^4.0.3",
     "fastify-plugin": "^4.3.0",
     "fastify-qs": "^4.0.0",
+    "moment": "^2.29.4",
     "mysql2": "^2.3.3",
     "node-fetch": "^3.2.10",
     "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20",
-    "tracer": "^1.1.6"
+    "tracer": "^1.1.6",
+    "xml2js": "^0.4.23"
   },
   "name": "facturamea",
   "version": "1.0.0",
