@@ -73,7 +73,7 @@ const HomeAPI = {
 			return {
 				date: `${oDate.getFullYear()}-${('0'+(oDate.getMonth()+1)).slice(-2)}-${('0'+oDate.getDate()).slice(-2)}`,
 				currency: currency,
-				value: rate[0]['_']
+				rate: parseFloat(rate[0]['_'])
 			}
 			
 

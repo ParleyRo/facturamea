@@ -43,7 +43,7 @@ module.exports = {
 		for( let index in oInvoicesData){
 			oData['invoicesData'][oInvoicesData[index].id] = oInvoicesData[index]
 		}
-		
+
 		return oData
 	},
 	async getCurrencies(){

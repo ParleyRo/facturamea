@@ -37,7 +37,6 @@ export default {
 	<InvoiceData 
 		:invoiceData="invoice"
 		:currenciesList="currencies"
-		:currencyValue="currencyValue"
 	/>
 
 	<div class="is-divider" data-content="Invoice rendered"></div>
@@ -60,7 +59,6 @@ export default {
 			:buyerFieldsList="buyer.fields"
 			:invoiceData="invoice"
 			:currenciesList="currencies"
-			:currencyValue="currencyValue"
 		/>
 	</div>
 </div>
@@ -96,13 +94,13 @@ export default {
 				label: "buyer"
 			},
 			currencies: this.availableCurrencies,
-			currencyValue: 1,
 			invoice:{
 				date: new Date(),
 				dueDate: new Date(Date.now() + dueDateTime ),
 				number: '',
 				dueDateTime: dueDateTime,
 				currency: 'ron',
+				rate: 1,
 				products: [
 					{
 						name: '',
@@ -132,7 +130,7 @@ export default {
 				return;
 			}
 			
-			this.currencyValue = '';
+			this.invoice.rate = 0;
 			const oDataCurrency = await this.getCurrency({
 				year: this.invoice.date.getFullYear(),
 				month: this.invoice.date.getMonth()+1,
@@ -140,7 +138,7 @@ export default {
 				currency: this.invoice.currency
 			})
 
-			this.currencyValue = oDataCurrency.value
+			this.invoice.rate = oDataCurrency.rate
 		},
 		'invoice.date': async function(newVal, oldVal){
 			
@@ -152,7 +150,7 @@ export default {
 				return;
 			}
 
-			this.currencyValue = '';
+			this.invoice.rate = 0;
 			
 			const oDataCurrency = await this.getCurrency({
 				year: newVal.getFullYear(),
@@ -161,7 +159,7 @@ export default {
 				currency: this.invoice.currency
 			})
 
-			this.currencyValue = oDataCurrency.value
+			this.invoice.rate = oDataCurrency.rate
 		},
 		invoices: {
 			deep: true,
@@ -217,6 +215,7 @@ export default {
 				id_buyer: this.buyer.list[this.buyer.selected].id,
 				number: this.invoice.number,
 				currency: this.invoice.currency,
+				rate: this.invoice.rate,
 				date: this.invoice.date.getTime(),
 				due_date: this.invoice.dueDate.getTime(),
 				products: this.invoice.products
