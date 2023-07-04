@@ -1,9 +1,5 @@
 const Controller = require('./invoice.controller');
 const View = require('../../middlewares/View.js');
-
-var pdf = require("pdf-creator-node");
-var fs = require("fs");
-
 const InvoiceAPI = {
 	get:{
 		handler: async (request,reply) => {
@@ -12,54 +8,6 @@ const InvoiceAPI = {
 				return reply.redirect('/users/login');
 			}
 
-// 			const filePath = require('path').join(
-//     __dirname,
-//     '../../output.pdf'
-//   );
-
-// 			const stream = require('fs').createReadStream(filePath)
-//   reply.header(
-//     'Content-Disposition',
-//     'attachment; filename=foo.pdf'
-//   )
-//   return reply.send(stream).type('application/sql').code(200);
-
-
-			// Read HTML Template
-			var view = new View(request,reply)
-			.setLayout('layouts/clean.eta')
-			.addCss('invoice.css')
-			.render('../invoice/invoice_rendered.html',await Controller.getDefault({
-				auth: request.auth
-			}))
-
-			
-			const html = await view;
-
-			var options = {
-				format: "A4",
-				orientation: "portrait"
-			}
-			var document = {
-				html: html,
-				data: {
-					
-				},
-				path: "./output.pdf",
-				type: "",
-			};
-			
-			pdf
-			.create(document, options)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-return reply
-.headers({'content-type': 'text/html; charset=utf-8'})
-.send(html)
 			return new View(request,reply)
 			.addCss('invoice.css')
 			.addCss('bulma-calendar.min.css')
