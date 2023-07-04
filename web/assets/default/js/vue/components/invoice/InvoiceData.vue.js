@@ -63,13 +63,19 @@ export default {
 			<div class="field">
 				<label class="mb-2">Description</label>
 				<div class="control pt-1">
-					<input 
-						class="input" 
-						type="text" 
+					<textarea 
+						v-model="product.name"
+						ref="textarea"
+						class="textarea" 
 						placeholder="Description..."
 						:required="true"
-						v-model="product.name"
+						rows="1"
+						@focus="resize"
+    					@keyup="resize"
+						@input="resize"
 					>
+					</textarea>
+					
 				</div>
 			</div>
 		</div>
@@ -148,6 +154,14 @@ export default {
 		invoiceData: Object,
 		currenciesList: Object,
 	},
+	watch: { 
+		invoiceData:{
+			deep: true,
+			handler(newValue, oldValue) {
+				this.resize();
+			}
+		}
+    },
 	methods:{
 		addProduct: function(){
 			this.invoice.products.push({
@@ -208,6 +222,19 @@ export default {
 			
 			return true
 
+		},
+
+		resize: function(){
+
+        	const { textarea } = this.$refs;
+			
+			textarea.forEach(element => {
+
+				element.style.height = "auto";
+
+				element.style.height = (element.scrollHeight + 1) + 'px';
+			});
+        	
 		}
 		
 	},
