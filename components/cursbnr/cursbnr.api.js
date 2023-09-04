@@ -38,7 +38,7 @@ const HomeAPI = {
 			let oDate = new Date(year,parseInt(month)-1,day,2)
 			let countDays = 1;
 
-			while(!rateDay.length && (countDays <= 3)){
+			while(!rateDay.length && (countDays <= 4)){
 
 				rateDay = oCursBnr.DataSet.Body[0].Cube.filter(days => {
 					return days['$']?.date === `${oDate.getFullYear()}-${('0'+(oDate.getMonth()+1)).slice(-2)}-${('0'+oDate.getDate()).slice(-2)}`;
