@@ -76,9 +76,9 @@ module.exports = {
 
 			footer: {
 				columns: [
-					{ text: `${data.companyData.companyName || ''}\nAddress: ${data.companyData.Address }\nBank: ${data.companyData.Bank}`, style: 'documentFooterLeft' },
-					{ text: `Company Registration Number: ${data.companyData.companyRegistrationNumber}\nPhone: ${data.companyData.Phone}\nSwift: ${data.companyData.Swift}`, style: 'documentFooterCenter' },
-					{ text: `VAT Number: ${data.companyData.VATNumber}\nEmail: ${data.companyData.Email}\nIban: ${data.companyData.Iban}`, style: 'documentFooterRight' }
+					{ text: `${data.companyData?.companyName || ''}\nAddress: ${data.companyData?.Address || ''}\nBank: ${data.companyData?.Bank || ''}`, style: 'documentFooterLeft' },
+					{ text: `Company Registration Number: ${data.companyData?.companyRegistrationNumber || ''}\nPhone: ${data.companyData?.Phone || ''}\nSwift: ${data.companyData?.Swift || ''}`, style: 'documentFooterCenter' },
+					{ text: `VAT Number: ${data.companyData?.VATNumber || ''}\nEmail: ${data.companyData?.Email || ''}\nIban: ${data.companyData?.Iban || ''}`, style: 'documentFooterRight' }
 				]
 			},
 			content: [
@@ -161,11 +161,11 @@ module.exports = {
 				{
 					columns: [
 						{
-							text: {text: data.companyData[data.companyFieldsList[0]] + '\n', bold: true, fontSize: 12, style: ['isTurquoise'] },
+							text: {text: (data.companyData?.[data.companyFieldsList[0]] || '') + '\n', bold: true, fontSize: 12, style: ['isTurquoise'] },
 							style: ['invoiceBillingDetails']
 						},
 						{
-							text: {text: data.buyerData[data.companyFieldsList[0]] + '\n', bold: true, fontSize: 12, style: ['isTurquoise'] },
+							text: {text: (data.buyerData?.[data.companyFieldsList[0]] || '') + '\n', bold: true, fontSize: 12, style: ['isTurquoise'] },
 							style: 'invoiceBillingDetails'
 						},
 					]
@@ -175,7 +175,7 @@ module.exports = {
 						{
 							 stack: data.companyFieldsList.slice(1).map(function (field,index) {
 							 	
-								if(data.companyData[field].trim() == ''){
+								if((data.companyData?.[field].trim() || '') == ''){
 
 									return '';
 								}
@@ -199,7 +199,7 @@ module.exports = {
 						{
 							stack: data.buyerFieldsList.slice(1).map(function (field,index) {
 
-								if((data.buyerData[field] || '').trim() == ''){
+								if((data.buyerData?.[field] || '').trim() == ''){
 
 									return '';
 								}
