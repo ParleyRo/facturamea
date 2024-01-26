@@ -12,11 +12,11 @@
 
 
 <script type="module">
-
+	
 	import { createApp } from 'vue';
 	
 	import Invoice from "/assets/default/js/vue/components/invoice/Invoice.vue.js";
-
+	
 	const invoice = createApp({
 		data() {
 			return {
