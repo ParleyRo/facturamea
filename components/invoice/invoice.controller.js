@@ -76,7 +76,7 @@ module.exports = {
 
 			footer: {
 				columns: [
-					{ text: `${data.companyData.companyName}\nAddress: ${data.companyData.Address}\nBank: ${data.companyData.Bank}`, style: 'documentFooterLeft' },
+					{ text: `${data.companyData.companyName || ''}\nAddress: ${data.companyData.Address }\nBank: ${data.companyData.Bank}`, style: 'documentFooterLeft' },
 					{ text: `Company Registration Number: ${data.companyData.companyRegistrationNumber}\nPhone: ${data.companyData.Phone}\nSwift: ${data.companyData.Swift}`, style: 'documentFooterCenter' },
 					{ text: `VAT Number: ${data.companyData.VATNumber}\nEmail: ${data.companyData.Email}\nIban: ${data.companyData.Iban}`, style: 'documentFooterRight' }
 				]
@@ -199,7 +199,7 @@ module.exports = {
 						{
 							stack: data.buyerFieldsList.slice(1).map(function (field,index) {
 
-								if(data.buyerData[field].trim() == ''){
+								if((data.buyerData[field] || '').trim() == ''){
 
 									return '';
 								}
