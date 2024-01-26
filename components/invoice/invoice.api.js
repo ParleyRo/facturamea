@@ -74,9 +74,7 @@ const InvoiceAPI = {
 					return reply.redirect('/', 200);
 				}
 
-				// console.log(request.body)
-				// return;
-				const fileName = `temp_${Date.now()}.pdf`;
+				const fileName = `${request.body?.invoiceData?.number ? 'invoice_' + request.body.invoiceData.number : 'temp'}_${Date.now()}.pdf`;
 				
 				const pdfBuffer = await Controller.generatePdf(request.body);
 				
