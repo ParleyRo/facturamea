@@ -7,8 +7,6 @@ const loadServices = require('./loaders/services')
 
 const loadRPC = require('./loaders/rpc')
 
-const fs = require('fs');
-
 const Fastify = require('fastify')
 
 function App() {
