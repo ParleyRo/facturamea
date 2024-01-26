@@ -46,6 +46,7 @@ export default {
 			<div class="buttons is-justify-content-flex-end">
 				<button :disabled="saveDisabled" class="button is-info is-outlined" v-on:click="add">Save Invoice</button>
 				<button class="button is-info" v-on:click="printToPdf">Print To Pdf</button>
+				<button class="button is-success" v-on:click="saveToPdf">Save To Pdf(experiment)</button>
 			</div>
 		</div>
 	</div>
@@ -237,13 +238,11 @@ export default {
 			this.saveDisabled = true;
 
 		},
-		printToPdf: function(){
+		printToPdf: async function(){
 			
 			var pdfContent = document.querySelector('#invoice-render').innerHTML;
 			var pdfTemplate = `<html><head>${document.head.innerHTML}</head><body>${pdfContent}</body></html>`;
-			
-			// var windowObject = window.open('',"ModalPopUp","toolbar=no,scrollbars=no,location=no,statusbar=no,menubar=no,resizable=0,left = 490,top=300");
-			
+						
 			var windowObject = window.open();
 
 			windowObject.document.write(pdfTemplate);
@@ -252,6 +251,45 @@ export default {
 				windowObject.print();
 				//windowObject.close();
 			}, 250);
+			
+		},
+		saveToPdf: async function(){
+						
+			const data = {
+				companyData: this.company.list[this.company.selected]?.data,
+				companyFieldsList: this.company.fields,
+				buyerData: this.buyer.list[this.buyer.selected]?.data,
+				buyerFieldsList: this.buyer.fields,
+				invoiceData: this.invoice,
+				currenciesList: this.currencies
+			}
+						
+			const response = await fetch(`/invoice/pdf/`,{
+				method: 'post',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify(data),
+			});
+
+			// Check if the request was successful (status code 200)
+			if (response.ok) {
+				// Get the filename from the 'Content-Disposition' header
+				const contentDisposition = response.headers.get('Content-Disposition');
+				const [, filename] = contentDisposition.match(/filename="(.+)"/) || [];
+
+				// Check if the filename is valid
+				if (filename) {
+					// Use the filename to save the file
+					const blob = await response.blob();
+					const link = document.createElement('a');
+					link.href = window.URL.createObjectURL(blob);
+					link.download = filename;
+					link.click();
+				} else {
+					console.error('Filename not provided in the response headers');
+				}
+			} else {
+				console.error('Request failed with status:', response.status);
+			}
 			
 		}
 

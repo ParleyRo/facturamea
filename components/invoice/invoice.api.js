@@ -1,7 +1,7 @@
 const Controller = require('./invoice.controller');
 const View = require('../../middlewares/View.js');
 const InvoiceAPI = {
-	get:{
+	get: {
 		handler: async (request,reply) => {
 			
 			if(request.auth == null){
@@ -19,7 +19,7 @@ const InvoiceAPI = {
 		},
 		url:'/'
 	},
-	postAdd:{
+	postAdd: {
 		handler: async (request,reply) => {
 
 			if(request.auth == null){
@@ -48,7 +48,7 @@ const InvoiceAPI = {
 		url:'/invoice/'
 	},
 
-	deleteInvoice:{
+	deleteInvoice: {
 		handler: async (request,reply) => {
 
 			if(request.auth == null){
@@ -63,6 +63,38 @@ const InvoiceAPI = {
 			}
 		},
 		url:'/invoice/:id'
+	},
+
+	postPdf: {
+	
+		handler: async (request, reply) => {
+
+			try {
+				if (request.auth == null) {
+					return reply.redirect('/', 200);
+				}
+
+				// console.log(request.body)
+				// return;
+				const fileName = `temp_${Date.now()}.pdf`;
+				
+				const pdfBuffer = await Controller.generatePdf(request.body);
+				
+				// Set the appropriate headers for the response
+				reply.header('Content-Type', 'application/pdf');
+				reply.header('Content-Disposition', `attachment; filename="${fileName}"`);
+
+				// Send the PDF buffer as the response
+				reply.send(pdfBuffer);
+				
+
+			} catch (error) {
+				console.error('Handler error:', error);
+				reply.status(500).send('Internal Server Error');
+			}
+
+		},
+		url:'/invoice/pdf'
 	}
 }
 module.exports = InvoiceAPI;

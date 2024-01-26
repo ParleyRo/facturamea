@@ -7,6 +7,8 @@ const loadServices = require('./loaders/services')
 
 const loadRPC = require('./loaders/rpc')
 
+const fs = require('fs');
+
 const Fastify = require('fastify')
 
 function App() {
@@ -15,7 +17,11 @@ function App() {
     logger:true,
     ignoreTrailingSlash: true,
     maxParamLength: 300,
-    trustProxy: true
+    trustProxy: true,
+    // https: {
+    //   key: fs.readFileSync(path.join(__dirname, 'cert.key')),
+    //   cert: fs.readFileSync(path.join(__dirname, 'cert.pem'))
+    // }
   });
   fastify.register(require('@fastify/formbody'))
   fastify.register(require('@fastify/multipart'), { attachFieldsToBody: true })
