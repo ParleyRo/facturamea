@@ -87,7 +87,7 @@ export default {
 				<tbody>
 					<tr v-for="(product, index) in invoiceData.products">
 						<td>{{index+1}}</td>
-						<td><div style="max-width: 350px;margin: 0 auto; white-space: pre-line;text-align: left;" v-html="product.name.replaceAll(' ','&nbsp;')"></div></td>
+						<td><div style="max-width: 350px;margin: 0 auto; white-space: pre-line;text-align: left;" v-html="product.name"></div></td>
 						<td>{{product.unit}}</td>
 						<td>{{product.qty}}</td>
 						<td>
